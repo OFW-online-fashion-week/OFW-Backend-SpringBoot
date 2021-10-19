@@ -19,7 +19,6 @@ public class AmazonS3Controller {
 
     @PostMapping("/upload")
     public String upload(@RequestParam("file") MultipartFile multipartFile) throws IOException {
-        amazonS3Service.uploadFile(multipartFile);
-        return "success";
+        return amazonS3Service.uploadFile(multipartFile);
     }
 }
