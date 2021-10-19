@@ -1,0 +1,21 @@
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIAWGZDLNNNDMUSQ3P5
+      secretKey: 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
+    s3:
+      bucket: yjk-test-bucket
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_study?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: wnsrl9098
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: update
