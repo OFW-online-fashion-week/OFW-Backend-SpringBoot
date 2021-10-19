@@ -7,6 +7,4 @@ import java.io.IOException;
 public interface AmazonS3Service {
 
     String uploadFile(MultipartFile file) throws IOException;
-
-    String getFileUrl(String fileName);
 }

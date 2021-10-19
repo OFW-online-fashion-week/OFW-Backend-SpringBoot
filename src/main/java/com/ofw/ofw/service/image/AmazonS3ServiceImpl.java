@@ -25,11 +25,10 @@ public class AmazonS3ServiceImpl implements AmazonS3Service {
     public String uploadFile(MultipartFile file) throws IOException {
         amazonS3.putObject(new PutObjectRequest(bucket, file.getOriginalFilename(), file.getInputStream(), null)
                 .withCannedAcl(CannedAccessControlList.PublicRead));
-        return amazonS3.getUrl(bucket, file.getOriginalFilename()).toString();
+        return getFileUrl(file.getOriginalFilename());
     }
 
-    @Override
-    public String getFileUrl(String fileName) {
+    private String getFileUrl(String fileName) {
         return amazonS3.getUrl(bucket, fileName).toString();
     }
 }
