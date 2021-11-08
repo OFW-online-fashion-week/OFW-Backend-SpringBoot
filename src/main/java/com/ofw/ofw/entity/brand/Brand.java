@@ -1,13 +1,13 @@
 package com.ofw.ofw.entity.brand;
 
+import com.ofw.ofw.entity.collection.Collection;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Builder
@@ -16,6 +16,7 @@ import javax.persistence.Id;
 @Entity
 public class Brand {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, length = 25)
@@ -38,4 +39,8 @@ public class Brand {
 
     @Column(columnDefinition = "TEXT")
     private String description;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Collection> collection;
+
 }
