@@ -5,9 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Builder
@@ -17,6 +15,7 @@ import javax.persistence.Id;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, length = 25)
@@ -25,4 +24,8 @@ public class User {
     @Column(nullable = false, length = 10)
     private String name;
 
+    public User update(String name) {
+        this.name = name;
+        return this;
+    }
 }
