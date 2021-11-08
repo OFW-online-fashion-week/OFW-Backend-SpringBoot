@@ -1,4 +1,9 @@
 package com.ofw.ofw.entity.user;
 
-public interface UserRepository {
+import org.springframework.data.repository.CrudRepository;
+
+import java.util.Optional;
+
+public interface UserRepository extends CrudRepository<User, Long> {
+    Optional<User> findByEmail(String email);
 }
