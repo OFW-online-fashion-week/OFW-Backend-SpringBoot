@@ -1,6 +1,6 @@
-package com.ofw.ofw.service.brand;
+package com.ofw.ofw.service.collection;
 
-import com.ofw.ofw.payload.response.CollectionListResponse;
+import com.ofw.ofw.payload.collection.response.CollectionListResponse;
 import org.springframework.data.domain.Pageable;
 
 public interface CollectionService {

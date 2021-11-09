@@ -1,9 +1,9 @@
-package com.ofw.ofw.service.brand;
+package com.ofw.ofw.service.collection;
 
 import com.ofw.ofw.entity.collection.Collection;
 import com.ofw.ofw.entity.collection.CollectionRepository;
-import com.ofw.ofw.payload.response.CollectionContentResponse;
-import com.ofw.ofw.payload.response.CollectionListResponse;
+import com.ofw.ofw.payload.collection.response.CollectionContentResponse;
+import com.ofw.ofw.payload.collection.response.CollectionListResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
