@@ -2,7 +2,7 @@ package com.ofw.ofw.service.auth;
 
 import com.ofw.ofw.entity.auth.AuthBrandCache;
 import com.ofw.ofw.entity.auth.AuthBrandCacheRepository;
-import com.ofw.ofw.payload.request.AuthRequestBrandRegisteringRequest;
+import com.ofw.ofw.payload.auth.request.AuthRequestBrandRegisteringRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
