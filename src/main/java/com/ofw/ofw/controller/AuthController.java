@@ -1,6 +1,6 @@
 package com.ofw.ofw.controller;
 
-import com.ofw.ofw.payload.request.AuthRequestBrandRegisteringRequest;
+import com.ofw.ofw.payload.auth.request.AuthRequestBrandRegisteringRequest;
 import com.ofw.ofw.payload.response.SessionUser;
 import com.ofw.ofw.service.auth.AuthService;
 import lombok.RequiredArgsConstructor;
