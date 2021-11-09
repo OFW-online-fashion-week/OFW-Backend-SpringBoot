@@ -1,4 +1,4 @@
-package com.ofw.ofw.payload.response;
+package com.ofw.ofw.payload.collection.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
