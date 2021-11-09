@@ -1,7 +1,7 @@
 package com.ofw.ofw.controller;
 
-import com.ofw.ofw.payload.response.CollectionListResponse;
-import com.ofw.ofw.service.brand.CollectionService;
+import com.ofw.ofw.payload.collection.response.CollectionListResponse;
+import com.ofw.ofw.service.collection.CollectionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
