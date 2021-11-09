@@ -1,4 +1,4 @@
-package com.ofw.ofw.payload.request;
+package com.ofw.ofw.payload.auth.request;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
