@@ -42,9 +42,6 @@ public class Brand {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @CreatedDate
-    private LocalDateTime createdAt;
-
     @OneToMany(fetch = FetchType.LAZY)
     private List<Collection> collection;
 
