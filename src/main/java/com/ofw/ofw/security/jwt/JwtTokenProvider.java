@@ -1,6 +1,7 @@
 package com.ofw.ofw.security.jwt;
 
 import com.ofw.ofw.exception.type.ExpiredAccessTokenException;
+import com.ofw.ofw.exception.type.InvalidTokenException;
 import com.ofw.ofw.security.jwt.auth.AuthDetailsService;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
