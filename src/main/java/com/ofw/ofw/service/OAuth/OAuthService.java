@@ -1,7 +1,6 @@
 package com.ofw.ofw.service.OAuth;
 import com.ofw.ofw.entity.user.User;
 import com.ofw.ofw.entity.user.UserRepository;
-import com.ofw.ofw.payload.response.SessionUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -34,7 +33,6 @@ public class OAuthService implements OAuth2UserService<OAuth2UserRequest, OAuth2
                 of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
         User user = saveOrUpdate(attributes);
-        httpSession.setAttribute("user", new SessionUser(user));
 
         return new DefaultOAuth2User(
                 null,
