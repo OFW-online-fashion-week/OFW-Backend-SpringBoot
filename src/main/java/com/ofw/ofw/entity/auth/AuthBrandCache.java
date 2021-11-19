@@ -3,6 +3,7 @@ package com.ofw.ofw.entity.auth;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
@@ -12,13 +13,14 @@ import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @Builder
 @RedisHash
 public class AuthBrandCache {
 
     @TimeToLive(unit = TimeUnit.DAYS)
-    private Long timeToLive;
+    private Integer timeToLive;
 
     @Id
     private String email;
