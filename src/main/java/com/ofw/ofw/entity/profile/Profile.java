@@ -15,8 +15,7 @@ import javax.persistence.*;
 @Entity
 public class Profile {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long model_id;
 
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId("model_id")
