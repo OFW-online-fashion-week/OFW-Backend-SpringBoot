@@ -17,8 +17,10 @@ import javax.persistence.*;
 @Entity
 public class Like {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long brand_id;
+
+    @Id
+    private Long user_id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("brand_id")
