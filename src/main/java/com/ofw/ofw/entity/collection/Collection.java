@@ -1,7 +1,7 @@
 package com.ofw.ofw.entity.collection;
 
 import com.ofw.ofw.entity.brand.Brand;
-import com.ofw.ofw.entity.collection_designer.Collection_designer;
+import com.ofw.ofw.entity.collection_designer.CollectionDesigner;
 import com.ofw.ofw.entity.runway.Runway;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,6 +30,7 @@ public class Collection {
     @Column(nullable = false, length = 50)
     private String title;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @Column(nullable = false)
@@ -38,9 +39,9 @@ public class Collection {
     @CreatedDate
     private LocalDateTime createdAt;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "runway", fetch = FetchType.LAZY)
     private List<Runway> runways;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Collection_designer> collection_designer;
+    @OneToMany(mappedBy = "collection_designer", fetch = FetchType.LAZY)
+    private List<CollectionDesigner> collection_designer;
 }
