@@ -2,6 +2,7 @@ package com.ofw.ofw.entity.runway;
 
 import com.ofw.ofw.entity.collection.Collection;
 import com.ofw.ofw.entity.history.History;
+import com.ofw.ofw.entity.model.Model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,10 +21,8 @@ public class Runway {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //model fk 하기
-
     @Column(nullable = false, length = 250)
-    private String runwayPath;
+    private String runway_path;
 
     @Column(length = 250)
     private String bgmPath;
@@ -35,6 +34,10 @@ public class Runway {
     @JoinColumn(name = "collection_id")
     private Collection collection;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "model_id")
+    private Model model;
+
+    @OneToMany(mappedBy = "history", fetch = FetchType.LAZY)
     private List<History> history;
 }
