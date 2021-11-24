@@ -11,7 +11,8 @@ public enum ErrorCode {
     INVALID_INPUT_VALUE(400, "Invalid input value"),
     EXPIRED_ACCESS_TOKEN(401, "Expired access token"),
     USER_NOT_FOUND(404, "User not found"),
-    BRAND_CACHE_NOT_FOUND(404, "Brand cache not found");
+    BRAND_CACHE_NOT_FOUND(404, "Brand cache not found"),
+    BRAND_NOT_FOUND(404, "Brand not found");
 
     private final int status;
     private final String message;
