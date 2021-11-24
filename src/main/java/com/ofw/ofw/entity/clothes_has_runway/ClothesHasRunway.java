@@ -16,8 +16,10 @@ import javax.persistence.*;
 @Entity
 public class ClothesHasRunway {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long clothes_id;
+
+    @Id
+    private Long runway_id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("clothes_id")
