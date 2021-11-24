@@ -25,7 +25,7 @@ public class Runway {
     private String runway_path;
 
     @Column(length = 250)
-    private String bgmPath;
+    private String bgm_path;
 
     @Column
     private Long accessCount;
