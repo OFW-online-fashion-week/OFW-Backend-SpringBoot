@@ -1,5 +1,6 @@
 package com.ofw.ofw.entity.brand;
 
+import com.ofw.ofw.entity.clothes.Clothes;
 import com.ofw.ofw.entity.collection.Collection;
 import com.ofw.ofw.entity.like.Like;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -43,10 +45,13 @@ public class Brand {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "collection", fetch = FetchType.LAZY)
     private List<Collection> collection;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "like", fetch = FetchType.LAZY)
     private List<Like> like;
+
+    @OneToMany(mappedBy = "clothes", fetch = FetchType.LAZY)
+    private List<Clothes> clothes;
 
 }
