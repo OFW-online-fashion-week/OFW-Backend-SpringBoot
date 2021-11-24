@@ -1,11 +1,13 @@
 package com.ofw.ofw.entity.user;
 
+import com.ofw.ofw.entity.like.Like;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Builder
@@ -28,4 +30,7 @@ public class User {
         this.name = name;
         return this;
     }
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Like> like;
 }
