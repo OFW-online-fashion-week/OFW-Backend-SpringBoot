@@ -1,6 +1,7 @@
 package com.ofw.ofw.entity.collection;
 
 import com.ofw.ofw.entity.brand.Brand;
+import com.ofw.ofw.entity.collection_designer.Collection_designer;
 import com.ofw.ofw.entity.runway.Runway;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,9 +35,12 @@ public class Collection {
     @Column(nullable = false)
     private Boolean implement;
 
+    @CreatedDate
+    private LocalDateTime createdAt;
+
     @OneToMany(fetch = FetchType.LAZY)
     private List<Runway> runways;
 
-    @CreatedDate
-    private LocalDateTime createdAt;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Collection_designer> collection_designer;
 }
