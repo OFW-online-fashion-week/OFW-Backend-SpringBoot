@@ -1,6 +1,7 @@
 package com.ofw.ofw.entity.brand;
 
 import com.ofw.ofw.entity.collection.Collection;
+import com.ofw.ofw.entity.like.Like;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -44,5 +45,8 @@ public class Brand {
 
     @OneToMany(fetch = FetchType.LAZY)
     private List<Collection> collection;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Like> like;
 
 }
