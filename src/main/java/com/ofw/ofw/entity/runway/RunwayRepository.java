@@ -1,4 +1,6 @@
 package com.ofw.ofw.entity.runway;
 
-public interface RunwayRepository {
+import org.springframework.data.repository.CrudRepository;
+
+public interface RunwayRepository extends CrudRepository<Runway, Long> {
 }
