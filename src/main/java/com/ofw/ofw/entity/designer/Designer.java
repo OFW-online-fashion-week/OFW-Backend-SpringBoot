@@ -1,8 +1,6 @@
 package com.ofw.ofw.entity.designer;
 
-import com.ofw.ofw.entity.brand.Brand;
-import com.ofw.ofw.entity.collection_designer.Collection_designer;
-import com.ofw.ofw.entity.user.User;
+import com.ofw.ofw.entity.collection_designer.CollectionDesigner;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,8 +25,9 @@ public class Designer {
     @Column(nullable = false, length = 20)
     private String name;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Collection_designer> collection_designer;
+    @OneToMany(mappedBy = "collection_designer", fetch = FetchType.LAZY)
+    private List<CollectionDesigner> collection_designer;
 }
