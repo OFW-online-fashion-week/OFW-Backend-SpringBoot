@@ -15,17 +15,13 @@ import javax.persistence.*;
 @Builder
 @Entity
 public class History {
-    @Id
-    private Long user_id;
-
-    @Id
-    private Long runway_id;
+    @EmbeddedId
+    private HistoryId historyId = new HistoryId();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("user_id")
     @JoinColumn(name = "user_id")
     private User user;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("runway_id")
