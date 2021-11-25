@@ -15,11 +15,9 @@ import javax.persistence.*;
 @Builder
 @Entity
 public class ClothesHasRunway {
-    @Id
-    private Long clothes_id;
-
-    @Id
-    private Long runway_id;
+    @EmbeddedId
+    @Builder.Default
+    private ClothesHasRunwayId runwayId = new ClothesHasRunwayId();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("clothes_id")
