@@ -38,6 +38,6 @@ public class Runway {
     @JoinColumn(name = "model_id")
     private Model model;
 
-    @OneToMany(mappedBy = "history", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "runway", fetch = FetchType.LAZY)
     private List<History> history;
 }
