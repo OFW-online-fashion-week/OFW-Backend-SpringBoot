@@ -1,11 +1,7 @@
 package com.ofw.ofw.entity.collection_designer;
 
-import com.ofw.ofw.entity.brand.Brand;
-import com.ofw.ofw.entity.clothes.Clothes;
 import com.ofw.ofw.entity.collection.Collection;
 import com.ofw.ofw.entity.designer.Designer;
-import com.ofw.ofw.entity.runway.Runway;
-import com.ofw.ofw.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,17 +15,14 @@ import javax.persistence.*;
 @Builder
 @Entity
 public class CollectionDesigner {
-    @Id
-    private Long collection_id;
-
-    @Id
-    private Long designer_id;
+    @EmbeddedId
+    @Builder.Default
+    private CollectionDesignerId designerId = new CollectionDesignerId();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("collection_id")
     @JoinColumn(name = "collection_id")
     private Collection collection;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("designer_id")
