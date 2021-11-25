@@ -42,13 +42,13 @@ public class Brand {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @OneToMany(mappedBy = "collection", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
     private List<Collection> collection;
 
-    @OneToMany(mappedBy = "like", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
     private List<Like> like;
 
-    @OneToMany(mappedBy = "clothes", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
     private List<Clothes> clothes;
 
 }
