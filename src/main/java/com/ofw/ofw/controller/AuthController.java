@@ -18,12 +18,12 @@ import javax.servlet.http.HttpSession;
 public class AuthController {
     private  final AuthService authService;
 
-    @GetMapping("auth/google")
+    @GetMapping("google")
     public ResponseEntity<LinkResponse> getGoogleLink() {
         return new ResponseEntity<>(authService.getGoogleLink(), HttpStatus.OK);
     }
 
-    @PostMapping("auth/google")
+    @PostMapping("google")
     public ResponseEntity<TokenResponse> getGoogleTokenByCode(@RequestBody GetGoogleTokenByCodeRequest request) {
         return new ResponseEntity<>(authService.getGoogleTokenByCode(request), HttpStatus.OK);
     }
