@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -18,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class Collection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,14 +36,14 @@ public class Collection {
     private String description;
 
     @Column(nullable = false)
-    private Boolean implement;
+    private Boolean implement = false;
 
     @CreatedDate
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "runway", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "collection", fetch = FetchType.LAZY)
     private List<Runway> runways;
 
-    @OneToMany(mappedBy = "collection_designer", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "collection", fetch = FetchType.LAZY)
     private List<CollectionDesigner> collection_designer;
 }
