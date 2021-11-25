@@ -16,11 +16,9 @@ import javax.persistence.*;
 @Builder
 @Entity
 public class Like {
-    @Id
-    private Long brand_id;
-
-    @Id
-    private Long user_id;
+    @EmbeddedId
+    @Builder.Default
+    private LikeId likeId = new LikeId();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("brand_id")
