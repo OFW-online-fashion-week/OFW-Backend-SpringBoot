@@ -28,6 +28,9 @@ public class Designer {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @OneToMany(mappedBy = "collection_designer", fetch = FetchType.LAZY)
+    @Column(nullable = false, length = 250)
+    private String profile_path;
+
+    @OneToMany(mappedBy = "designer", fetch = FetchType.LAZY)
     private List<CollectionDesigner> collection_designer;
 }
