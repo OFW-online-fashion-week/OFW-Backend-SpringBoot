@@ -31,6 +31,6 @@ public class User {
         return this;
     }
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Like> like;
 }
