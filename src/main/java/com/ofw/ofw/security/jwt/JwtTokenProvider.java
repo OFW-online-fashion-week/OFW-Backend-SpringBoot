@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Date;
 
@@ -26,9 +25,6 @@ public class JwtTokenProvider {
     @Value("${jwt.access.exp}")
     private Long accessExp;
 
-    @Value("${jwt.refresh.exp}")
-    private Long refreshExp;
-
     @Value("${jwt.header}")
     private String header;
 
@@ -37,25 +33,15 @@ public class JwtTokenProvider {
 
     private final AuthDetailsService authDetailsService;
 
-    public String generateAccessToken(String email) {
+    public String generateAccessToken(String email, String aud) {
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256, getSecretKey())
                 .setHeaderParam("typ", "JWT")
                 .setSubject(email)
+                .setAudience(aud)
                 .claim("type", "access")
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + accessExp * 1000))
-                .compact();
-    }
-
-    public String generateRefreshToken(String email) {
-        return Jwts.builder()
-                .signWith(SignatureAlgorithm.HS256, getSecretKey())
-                .setHeaderParam("typ", "JWT")
-                .setSubject(email)
-                .claim("type", "refresh")
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + refreshExp * 1000))
                 .compact();
     }
 
@@ -92,7 +78,6 @@ public class JwtTokenProvider {
     private String getTokenSubject(String token) {
         return getTokenBody(token).getSubject();
     }
-
 
     private String getSecretKey() {
         return Base64.getEncoder().encodeToString(secretKey.getBytes());
