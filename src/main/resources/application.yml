@@ -40,8 +40,8 @@ logging:
     path: ./youwho
   size: 1000000
 
-  oauth:
-    google:
-      redirect_uri: ${GOOGLE_REDIRECT_URI}
-      client_id: ${GOOGLE_CLIENT_ID}
-      client_secret: ${GOOGLE_CLIENT_SECRET}
+oauth:
+  google:
+    redirect_uri: ${GOOGLE_REDIRECT_URI}
+    client_id: ${GOOGLE_CLIENT_ID}
+    client_secret: ${GOOGLE_CLIENT_SECRET}
