@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Getter
+@Builder
 @NoArgsConstructor
 @Embeddable
 public class ClothesHasRunwayId implements Serializable {
