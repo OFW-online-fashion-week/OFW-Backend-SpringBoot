@@ -1,7 +1,14 @@
 package com.ofw.ofw.service.collection;
 
+import com.ofw.ofw.entity.auth.AuthBrandCache;
+import com.ofw.ofw.entity.brand.Brand;
 import com.ofw.ofw.entity.collection.Collection;
 import com.ofw.ofw.entity.collection.CollectionRepository;
+import com.ofw.ofw.entity.collection_designer.CollectionDesigner;
+import com.ofw.ofw.entity.designer.Designer;
+import com.ofw.ofw.entity.designer.DesignerRepository;
+import com.ofw.ofw.exception.type.DesignerNotFoundException;
+import com.ofw.ofw.payload.collection.request.CreateCollectionRequest;
 import com.ofw.ofw.payload.collection.response.CollectionContentResponse;
 import com.ofw.ofw.payload.collection.response.CollectionListResponse;
 import com.ofw.ofw.payload.collection.response.CollectionResponse;
@@ -17,6 +24,7 @@ import java.util.stream.Collectors;
 public class CollectionServiceImpl implements CollectionService {
 
     private final CollectionRepository collectionRepository;
+    private final DesignerRepository designerRepository;
 
     @Override
     public CollectionListResponse getCollectionList(Pageable pageable) {
@@ -24,19 +32,35 @@ public class CollectionServiceImpl implements CollectionService {
                 .getContent();
         List<CollectionContentResponse> contentResponses =
                 collections.stream().map(
-                        collection -> CollectionContentResponse.builder()
-                                .description(collection.getDescription())
-                                .title(collection.getTitle())
-                                .runway_path(collection.getRunways().isEmpty() ? collection.getRunways().get(0).getRunway_path() : null)
-                                .build())
+                                collection -> CollectionContentResponse.builder()
+                                        .description(collection.getDescription())
+                                        .title(collection.getTitle())
+                                        .runway_path(collection.getRunways().isEmpty() ? collection.getRunways().get(0).getRunway_path() : null)
+                                        .build())
                         .collect(Collectors.toList());
         return new CollectionListResponse(contentResponses);
     }
 
     @Override
-    public CollectionResponse getCollection(Long collectionId){
+    public CollectionResponse getCollection(Long collectionId) {
         CollectionResponse collection = collectionRepository.getCollection(collectionId);
 
         return collection;
-        }
+    }
+
+    @Override
+    public void createCollection(CreateCollectionRequest request) {
+        Designer designer = designerRepository.findById(request.getDesignerId())
+                .orElseThrow(DesignerNotFoundException::new);
+
+        Collection collection = Collection.builder()
+                .title(request.getTitle())
+                .description(request.getDescription())
+                .brand(Brand.builder().id(request.getBrandId()).build())
+                .collection_designer(designer)
+                .implement(false)
+                .build();
+
+        collectionRepository.save(collection);
+    }
 }
