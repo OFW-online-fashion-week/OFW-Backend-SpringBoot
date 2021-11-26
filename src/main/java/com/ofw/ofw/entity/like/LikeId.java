@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 
+@Builder
 @Getter
 @NoArgsConstructor
 @Embeddable
