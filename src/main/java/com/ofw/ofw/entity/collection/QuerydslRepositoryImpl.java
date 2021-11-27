@@ -56,8 +56,7 @@ public class QuerydslRepositoryImpl implements QuerydslRepository {
                         designer.profilePath.as("designer_profilePath")
                         )
                 )
-                .from(collection)
-                .join(collectionDesigner.collection, collection)
+                .from(designer)
                 .join(collectionDesigner.designer, designer)
                 .where(collectionDesigner.collection.eq(collections))
                 .fetchOne();
