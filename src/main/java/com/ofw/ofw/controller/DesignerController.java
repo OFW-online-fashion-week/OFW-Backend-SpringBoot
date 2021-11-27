@@ -26,7 +26,8 @@ public class DesignerController {
     }
 
     @PostMapping()
-    public void createDesigner(@RequestBody CreateDesignerRequest request){
+    public String createDesigner(@RequestBody CreateDesignerRequest request){
         designerService.createDesigner(request);
+        return "success";
     }
 }
