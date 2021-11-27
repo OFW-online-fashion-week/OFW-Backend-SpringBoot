@@ -2,6 +2,7 @@ package com.ofw.ofw.controller;
 
 import com.ofw.ofw.payload.auth.request.AuthRequestBrandRegisteringRequest;
 import com.ofw.ofw.payload.collection.request.CreateCollectionRequest;
+import com.ofw.ofw.payload.collection.response.BrandCollectionListResponse;
 import com.ofw.ofw.payload.collection.response.CollectionListResponse;
 import com.ofw.ofw.payload.collection.response.CollectionResponse;
 import com.ofw.ofw.service.collection.CollectionService;
@@ -32,6 +33,11 @@ public class CollectionController {
     public String cteateCollection(@RequestBody CreateCollectionRequest request){
         collectionService.createCollection(request);
         return "success";
+    }
+
+    @GetMapping("/brand/{brandId}")
+    public BrandCollectionListResponse getBrandCollectionList(@PathVariable Long brandId){
+        return collectionService.getBrandCollectionList(brandId);
     }
 
 }
