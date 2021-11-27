@@ -2,10 +2,14 @@ package com.ofw.ofw.service.auth;
 
 import com.ofw.ofw.entity.auth.AuthBrandCache;
 import com.ofw.ofw.entity.auth.AuthBrandCacheRepository;
+import com.ofw.ofw.entity.brand.Brand;
+import com.ofw.ofw.entity.brand.BrandRepository;
 import com.ofw.ofw.entity.user.User;
 import com.ofw.ofw.entity.user.UserRepository;
+import com.ofw.ofw.exception.type.BrandNotFoundException;
 import com.ofw.ofw.payload.auth.request.AuthRequestBrandRegisteringRequest;
 import com.ofw.ofw.payload.auth.request.GetGoogleTokenByCodeRequest;
+import com.ofw.ofw.payload.auth.request.SignInBrandRequest;
 import com.ofw.ofw.payload.auth.response.LinkResponse;
 import com.ofw.ofw.payload.auth.response.TokenResponse;
 import com.ofw.ofw.security.jwt.JwtTokenProvider;
@@ -17,6 +21,7 @@ import com.ofw.ofw.util.api.dto.google.response.GoogleTokenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -41,6 +46,7 @@ public class AuthServiceImpl implements AuthService{
     private final UserRepository userRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthBrandCacheRepository repository;
+    private final BrandRepository brandRepository;
 
     @Override
     public LinkResponse getGoogleLink() {
@@ -95,4 +101,25 @@ public class AuthServiceImpl implements AuthService{
 
         repository.save(brandCache);
     }
+
+    @Override
+    public TokenResponse brandSignIn(SignInBrandRequest request){
+        Brand brand = verifyBrand(request);
+        TokenResponse response = generateTokenResponse(brand);
+
+        return response;
+    }
+
+    public Brand verifyBrand(SignInBrandRequest request){
+        return brandRepository.findByEmail(request.getEmail())
+                .orElseThrow(BrandNotFoundException::new);
+    }
+
+    public TokenResponse generateTokenResponse(Brand brand){
+        return TokenResponse.builder()
+                .accessToken(jwtTokenProvider.generateAccessToken(brand.getEmail(), "Brand"))
+                .build();
+    }
+
+
 }
