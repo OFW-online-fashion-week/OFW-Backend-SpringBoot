@@ -22,10 +22,10 @@ public class Runway {
     private Long id;
 
     @Column(nullable = false, length = 250)
-    private String runway_path;
+    private String runwayPath;
 
     @Column(length = 250)
-    private String bgm_path;
+    private String bgmPath;
 
     @Column
     private Long accessCount;
