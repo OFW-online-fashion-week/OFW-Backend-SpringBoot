@@ -29,7 +29,7 @@ public class Designer {
     private String description;
 
     @Column(nullable = false, length = 250)
-    private String profile_path;
+    private String profilePath;
 
     @OneToMany(mappedBy = "designer", fetch = FetchType.LAZY)
     private List<CollectionDesigner> collection_designer;
