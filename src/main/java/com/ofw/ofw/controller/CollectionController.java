@@ -1,6 +1,5 @@
 package com.ofw.ofw.controller;
 
-import com.ofw.ofw.payload.auth.request.AuthRequestBrandRegisteringRequest;
 import com.ofw.ofw.payload.collection.request.CreateCollectionRequest;
 import com.ofw.ofw.payload.collection.response.BrandCollectionListResponse;
 import com.ofw.ofw.payload.collection.response.CollectionListResponse;
