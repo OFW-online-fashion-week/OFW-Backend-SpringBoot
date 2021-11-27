@@ -14,4 +14,8 @@ public class SerachDesignerResponse {
 
     private String email;
 
+    public SerachDesignerResponse(SerachDesignerResponse searchDesigner){
+        this.name = searchDesigner.getName();
+        this.email = searchDesigner.getEmail();
+    }
 }
