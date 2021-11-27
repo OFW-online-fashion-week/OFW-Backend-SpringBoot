@@ -13,7 +13,7 @@ public class CollectionContentResponse {
 
     private String title;
 
-    private String runway_path;
+    private String runwayPath;
 
     private String description;
 
