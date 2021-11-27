@@ -15,7 +15,8 @@ public enum ErrorCode {
     BRAND_NOT_FOUND(404, "Brand not found"),
     CREDENTIALS_NOT_FOUND(401, "Credentials not found"),
     RUNWAY_NOT_FOUND(404, "Runway not found"),
-    DESIGNER_NOT_FOUND(404, "Designer not found");
+    DESIGNER_NOT_FOUND(404, "Designer not found"),
+    MODEL_NOT_FOUND(404, "Model not found");
 
     private final int status;
     private final String message;
