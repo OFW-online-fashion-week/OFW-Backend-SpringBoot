@@ -10,6 +10,7 @@ import com.ofw.ofw.entity.designer.Designer;
 import com.ofw.ofw.entity.designer.DesignerRepository;
 import com.ofw.ofw.exception.type.DesignerNotFoundException;
 import com.ofw.ofw.payload.collection.request.CreateCollectionRequest;
+import com.ofw.ofw.payload.collection.response.BrandCollectionListResponse;
 import com.ofw.ofw.payload.collection.response.CollectionContentResponse;
 import com.ofw.ofw.payload.collection.response.CollectionListResponse;
 import com.ofw.ofw.payload.collection.response.CollectionResponse;
@@ -37,7 +38,7 @@ public class CollectionServiceImpl implements CollectionService {
                                 collection -> CollectionContentResponse.builder()
                                         .description(collection.getDescription())
                                         .title(collection.getTitle())
-                                        .runway_path(collection.getRunways().isEmpty() ? collection.getRunways().get(0).getRunway_path() : null)
+                                        .runwayPath(collection.getRunways().isEmpty() ? collection.getRunways().get(0).getRunwayPath() : null)
                                         .build())
                         .collect(Collectors.toList());
         return new CollectionListResponse(contentResponses);
@@ -68,5 +69,20 @@ public class CollectionServiceImpl implements CollectionService {
                 .designer(designer)
                 .build();
         collectionDesignerRepository.save(collectionDesigner);
+    }
+
+    @Override
+    public BrandCollectionListResponse getBrandCollectionList(Long brandId){
+        List<Collection> brandCollections = collectionRepository.findAllByBrand(brandId);
+
+        List<CollectionContentResponse> brandContentResponses =
+                brandCollections.stream().map(
+                                collection -> CollectionContentResponse.builder()
+                                        .description(collection.getDescription())
+                                        .title(collection.getTitle())
+                                        .runwayPath(collection.getRunways().isEmpty() ? collection.getRunways().get(0).getRunwayPath() : null)
+                                        .build())
+                        .collect(Collectors.toList());
+        return new BrandCollectionListResponse(brandContentResponses);
     }
 }
