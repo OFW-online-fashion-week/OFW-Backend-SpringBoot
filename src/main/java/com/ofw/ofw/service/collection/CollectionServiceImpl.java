@@ -1,6 +1,5 @@
 package com.ofw.ofw.service.collection;
 
-import com.ofw.ofw.entity.auth.AuthBrandCache;
 import com.ofw.ofw.entity.brand.Brand;
 import com.ofw.ofw.entity.collection.Collection;
 import com.ofw.ofw.entity.collection.CollectionRepository;
@@ -48,7 +47,7 @@ public class CollectionServiceImpl implements CollectionService {
     public CollectionResponse getCollection(Long collectionId) {
         CollectionResponse collection = collectionRepository.getCollection(collectionId);
 
-        return collection;
+        return new CollectionResponse(collection);
     }
 
     @Override
