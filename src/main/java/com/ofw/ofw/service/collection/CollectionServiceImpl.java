@@ -5,6 +5,7 @@ import com.ofw.ofw.entity.brand.Brand;
 import com.ofw.ofw.entity.collection.Collection;
 import com.ofw.ofw.entity.collection.CollectionRepository;
 import com.ofw.ofw.entity.collection_designer.CollectionDesigner;
+import com.ofw.ofw.entity.collection_designer.CollectionDesignerRepository;
 import com.ofw.ofw.entity.designer.Designer;
 import com.ofw.ofw.entity.designer.DesignerRepository;
 import com.ofw.ofw.exception.type.DesignerNotFoundException;
@@ -25,6 +26,7 @@ public class CollectionServiceImpl implements CollectionService {
 
     private final CollectionRepository collectionRepository;
     private final DesignerRepository designerRepository;
+    private final CollectionDesignerRepository collectionDesignerRepository;
 
     @Override
     public CollectionListResponse getCollectionList(Pageable pageable) {
@@ -57,10 +59,14 @@ public class CollectionServiceImpl implements CollectionService {
                 .title(request.getTitle())
                 .description(request.getDescription())
                 .brand(Brand.builder().id(request.getBrandId()).build())
-                .collection_designer(designer)
                 .implement(false)
                 .build();
-
         collectionRepository.save(collection);
+
+        CollectionDesigner collectionDesigner = CollectionDesigner.builder()
+                .collection(collection)
+                .designer(designer)
+                .build();
+        collectionDesignerRepository.save(collectionDesigner);
     }
 }
