@@ -29,7 +29,7 @@ public class QuerydslRepositoryImpl implements QuerydslRepository {
                         collection.description,
                         designer.name.as("designer_name"),
                         designer.description.as("designer_description"),
-                        designer.profile_path.as("designer_profile"))
+                        designer.profilePath.as("designer_profile"))
                 )
                 .from(collection)
                 .join(collectionDesigner.collection, collection)
