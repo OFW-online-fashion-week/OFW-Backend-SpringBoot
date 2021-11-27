@@ -18,6 +18,9 @@ public class Model {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 30)
+    private String name;
+
     @Column(nullable = false, length = 25)
     private String email;
 
