@@ -17,15 +17,15 @@ import javax.persistence.*;
 public class CollectionDesigner {
     @EmbeddedId
     @Builder.Default
-    private CollectionDesignerId designerId = new CollectionDesignerId();
+    private CollectionDesignerId collectionDesignerId = new CollectionDesignerId();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("collection_id")
+    @MapsId("collectionId")
     @JoinColumn(name = "collection_id")
     private Collection collection;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("designer_id")
+    @MapsId("designerId")
     @JoinColumn(name = "designer_id")
     private Designer designer;
 }
