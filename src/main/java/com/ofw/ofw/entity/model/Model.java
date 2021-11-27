@@ -23,10 +23,4 @@ public class Model {
 
     @Column(nullable = false, length = 250)
     private String profile_path;
-
-    @Column(nullable = false, length = 30)
-    private String nation;
-
-    @Column(length = 50)
-    private String introduction;
 }
