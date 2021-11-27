@@ -26,4 +26,12 @@ public class CollectionResponse {
         this.designerDescription = designerDescription;
         this.designerProfile = designerProfile;
     }
+
+    public CollectionResponse(CollectionResponse collection){
+        this.title = collection.getTitle();
+        this.description = collection.getDescription();
+        this.designerName = collection.getDesignerName();
+        this.designerDescription = collection.getDesignerDescription();
+        this.designerProfile = collection.getDesignerProfile();
+    }
 }
