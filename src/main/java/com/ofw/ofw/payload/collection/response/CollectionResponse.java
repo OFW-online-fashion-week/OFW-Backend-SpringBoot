@@ -12,18 +12,18 @@ public class CollectionResponse {
 
     private String description;
 
-    private String designer_name;
+    private String designerName;
 
-    private String designer_description;
+    private String designerDescription;
 
-    private String designer_profile;
+    private String designerProfile;
 
     @QueryProjection
-    public CollectionResponse(String title, String description, String designer_name, String designer_description, String designer_profile) {
+    public CollectionResponse(String title, String description, String designerName, String designerDescription, String designerProfile) {
         this.title = title;
         this.description = description;
-        this.designer_name = designer_name;
-        this.designer_description = designer_description;
-        this.designer_profile = designer_profile;
+        this.designerName = designerName;
+        this.designerDescription = designerDescription;
+        this.designerProfile = designerProfile;
     }
 }
