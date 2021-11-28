@@ -28,6 +28,12 @@ public class Profile {
     @Column
     private Long weight;
 
-    @Column
-    private Long nation;
+    @Column(length = 30)
+    private String nation;
+
+    @Column(length = 1)
+    private String gender;
+
+    @Column(length = 50)
+    private String introduction;
 }

@@ -24,6 +24,9 @@ public class Clothes {
     @Column(nullable = false, length = 250)
     private String image_path;
 
+    @Column(length = 40)
+    private String name;
+
     @Column( length = 25)
     private String style_code;
 

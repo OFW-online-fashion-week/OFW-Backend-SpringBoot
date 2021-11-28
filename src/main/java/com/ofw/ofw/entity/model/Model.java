@@ -18,15 +18,12 @@ public class Model {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 30)
+    private String name;
+
     @Column(nullable = false, length = 25)
     private String email;
 
     @Column(nullable = false, length = 250)
     private String profile_path;
-
-    @Column(nullable = false, length = 30)
-    private String nation;
-
-    @Column(length = 50)
-    private String introduction;
 }
