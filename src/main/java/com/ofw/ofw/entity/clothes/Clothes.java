@@ -28,7 +28,7 @@ public class Clothes {
     private String name;
 
     @Column( length = 25)
-    private String style_code;
+    private String styleCode;
 
     @Column(columnDefinition = "TEXT")
     private String description;
