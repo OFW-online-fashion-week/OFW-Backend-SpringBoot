@@ -28,10 +28,10 @@ public class Brand {
     private String password;
 
     @Column(nullable = false, length = 250)
-    private String profile_path;
+    private String profilePath;
 
     @Column(nullable = false, length = 250)
-    private String cover_path;
+    private String coverPath;
 
     @Column(nullable = false, length = 100)
     private String url;
