@@ -25,5 +25,5 @@ public class Model {
     private String email;
 
     @Column(nullable = false, length = 250)
-    private String profile_path;
+    private String profilePath;
 }
