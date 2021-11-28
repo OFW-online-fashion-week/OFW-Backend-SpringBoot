@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Entity
 public class Profile {
     @Id
-    private Long model_id;
+    private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId("model_id")
