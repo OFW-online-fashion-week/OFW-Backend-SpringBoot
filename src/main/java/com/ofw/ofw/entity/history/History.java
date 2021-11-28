@@ -19,12 +19,12 @@ public class History {
     private HistoryId historyId = new HistoryId();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("user_id")
+    @MapsId("userId")
     @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("runway_id")
+    @MapsId("runwayId")
     @JoinColumn(name = "runway_id")
     private Runway runway;
 
