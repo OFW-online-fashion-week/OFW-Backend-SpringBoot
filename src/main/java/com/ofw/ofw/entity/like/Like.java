@@ -21,12 +21,12 @@ public class Like {
     private LikeId likeId = new LikeId();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("brand_id")
+    @MapsId("brandId")
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("user_id")
+    @MapsId("userId")
     @JoinColumn(name = "user_id")
     private User user;
 
