@@ -20,13 +20,13 @@ public class ClothesHasRunway {
     private ClothesHasRunwayId runwayId = new ClothesHasRunwayId();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("clothes_id")
+    @MapsId("clothesId")
     @JoinColumn(name = "clothes_id")
     private Clothes clothes;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("runway_id")
+    @MapsId("runwayId")
     @JoinColumn(name = "runway_id")
     private Runway runway;
 }
