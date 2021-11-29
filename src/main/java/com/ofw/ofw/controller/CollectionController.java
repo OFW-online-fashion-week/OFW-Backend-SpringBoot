@@ -29,7 +29,7 @@ public class CollectionController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public String cteateCollection(@RequestBody CreateCollectionRequest request){
+    public String createCollection(@RequestBody CreateCollectionRequest request){
         collectionService.createCollection(request);
         return "success";
     }
