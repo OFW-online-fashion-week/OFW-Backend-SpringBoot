@@ -34,7 +34,7 @@ public class AuthController {
         return "success";
     }
 
-    @PostMapping("/brand/signin")
+    @PostMapping("/brand/login")
     @ResponseStatus(HttpStatus.CREATED)
     public TokenResponse brandSignIn(@RequestBody SignInBrandRequest request){
         return authService.brandSignIn(request);
