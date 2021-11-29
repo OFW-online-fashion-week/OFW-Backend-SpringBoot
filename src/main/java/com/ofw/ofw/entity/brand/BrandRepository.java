@@ -6,6 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BrandRepository extends JpaRepository<Brand, Long> {
-    List<Brand> findByNameStartsWithIgnoreCase(String rating);
+    List<Brand> findAllByNameStartsWithIgnoreCase(String rating);
     Optional<Brand> findByEmail(String email);
 }

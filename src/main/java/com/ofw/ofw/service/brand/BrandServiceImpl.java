@@ -23,7 +23,7 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public BrandListResponse getBrandList(String filter) {
-        List<Brand> brandList = brandRepository.findByNameStartsWithIgnoreCase(filter);
+        List<Brand> brandList = brandRepository.findAllByNameStartsWithIgnoreCase(filter);
         return new BrandListResponse(
                 brandList.stream().map(brand -> BrandContentResponse.builder()
                         .id(brand.getId())
