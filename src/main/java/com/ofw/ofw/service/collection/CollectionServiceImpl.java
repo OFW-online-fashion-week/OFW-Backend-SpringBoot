@@ -1,6 +1,7 @@
 package com.ofw.ofw.service.collection;
 
 import com.ofw.ofw.entity.brand.Brand;
+import com.ofw.ofw.entity.brand.BrandRepository;
 import com.ofw.ofw.entity.collection.Collection;
 import com.ofw.ofw.entity.collection.CollectionRepository;
 import com.ofw.ofw.entity.collection_designer.CollectionDesigner;
@@ -13,11 +14,14 @@ import com.ofw.ofw.payload.collection.response.BrandCollectionListResponse;
 import com.ofw.ofw.payload.collection.response.CollectionContentResponse;
 import com.ofw.ofw.payload.collection.response.CollectionListResponse;
 import com.ofw.ofw.payload.collection.response.CollectionResponse;
+import com.ofw.ofw.security.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -27,6 +31,7 @@ public class CollectionServiceImpl implements CollectionService {
     private final CollectionRepository collectionRepository;
     private final DesignerRepository designerRepository;
     private final CollectionDesignerRepository collectionDesignerRepository;
+    private final BrandRepository brandRepository;
 
     @Override
     public CollectionListResponse getCollectionList(Pageable pageable) {
@@ -71,8 +76,16 @@ public class CollectionServiceImpl implements CollectionService {
     }
 
     @Override
-    public BrandCollectionListResponse getBrandCollectionList(Long brandId){
-        List<Collection> brandCollections = collectionRepository.findAllByBrand(brandId);
+    public BrandCollectionListResponse getBrandCollectionList(Long brandId) {
+        String email = UserFacade.getEmail();
+        List<Collection> brandCollections = new ArrayList<>();
+        Optional<Brand> brand = brandRepository.findByEmail(email);
+
+        if (brand.isEmpty()) {
+            brandCollections = collectionRepository.findAllByBrandIdAndImplementFalse(brandId);
+        } else {
+            brandCollections = collectionRepository.findAllByBrandId(brandId);
+        }
 
         List<CollectionContentResponse> brandContentResponses =
                 brandCollections.stream().map(
