@@ -1,5 +1,6 @@
 package com.ofw.ofw.payload.auth.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,12 +10,14 @@ import org.springframework.lang.Nullable;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthRequestBrandRegisteringRequest {
+public class  AuthRequestBrandRegisteringRequest {
 
     @NotNull
+    @JsonProperty("profile_url")
     private String profileUrl;
 
     @NotNull
+    @JsonProperty("cover_url")
     private String coverUrl;
 
     @NotNull

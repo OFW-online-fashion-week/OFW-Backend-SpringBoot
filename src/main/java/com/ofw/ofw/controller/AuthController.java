@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
     private  final AuthService authService;
 
-    @GetMapping("google")
+    @GetMapping("/google")
     public ResponseEntity<LinkResponse> getGoogleLink() {
         return new ResponseEntity<>(authService.getGoogleLink(), HttpStatus.OK);
     }
 
-    @PostMapping("google")
+    @PostMapping("/google")
     public ResponseEntity<TokenResponse> getGoogleTokenByCode(@RequestBody GetGoogleTokenByCodeRequest request) {
         return new ResponseEntity<>(authService.getGoogleTokenByCode(request), HttpStatus.OK);
     }

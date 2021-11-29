@@ -1,6 +1,7 @@
 package com.ofw.ofw.entity.user;
 
 import com.ofw.ofw.entity.like.Like;
+import com.querydsl.core.annotations.QueryEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@QueryEntity
 public class User {
 
     @Id

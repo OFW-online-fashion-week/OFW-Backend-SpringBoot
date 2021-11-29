@@ -1,6 +1,7 @@
 package com.ofw.ofw.entity.designer;
 
 import com.ofw.ofw.entity.collection_designer.CollectionDesigner;
+import com.querydsl.core.annotations.QueryEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
+@QueryEntity
 public class Designer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

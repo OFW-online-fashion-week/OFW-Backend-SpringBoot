@@ -3,6 +3,7 @@ package com.ofw.ofw.entity.collection;
 import com.ofw.ofw.entity.brand.Brand;
 import com.ofw.ofw.entity.collection_designer.CollectionDesigner;
 import com.ofw.ofw.entity.runway.Runway;
+import com.querydsl.core.annotations.QueryEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,6 +21,7 @@ import java.util.List;
 @Builder
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@QueryEntity
 public class Collection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

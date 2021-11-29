@@ -1,6 +1,7 @@
 package com.ofw.ofw.entity.model;
 
 import com.ofw.ofw.entity.brand.Brand;
+import com.querydsl.core.annotations.QueryEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Entity
+@QueryEntity
 public class Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

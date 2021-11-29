@@ -1,8 +1,8 @@
 package com.ofw.ofw.security;
 
 import com.ofw.ofw.exception.ExceptionHandlerFilter;
-import com.ofw.ofw.security.jwt.JwtTokenProvider;
 import com.ofw.ofw.security.jwt.FilterConfigure;
+import com.ofw.ofw.security.jwt.JwtTokenProvider;
 import com.ofw.ofw.security.logging.RequestLogger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -37,6 +37,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/auth/brand/signup").permitAll()
                 .antMatchers(HttpMethod.GET, "/auth/brand/login").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/upload").permitAll()
+                .antMatchers(HttpMethod.GET, "/admin").permitAll()
+                .antMatchers(HttpMethod.GET, "/admin/{id}").permitAll()
+                .antMatchers(HttpMethod.HEAD, "/admin/email/{id}").permitAll()
+                .antMatchers(HttpMethod.POST, "/admin/{id}").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/admin/{id}").permitAll()
+                .antMatchers(HttpMethod.GET, "/brand").permitAll()
+                .antMatchers(HttpMethod.GET, "/brand/{brand_id}").permitAll()
                 .anyRequest().authenticated()
                 .and().apply(new FilterConfigure(jwtTokenProvider, exceptionHandlerFilter, requestLogger));
     }

@@ -3,6 +3,7 @@ package com.ofw.ofw.entity.brand;
 import com.ofw.ofw.entity.clothes.Clothes;
 import com.ofw.ofw.entity.collection.Collection;
 import com.ofw.ofw.entity.like.Like;
+import com.querydsl.core.annotations.QueryEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@QueryEntity
 public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 @Setter
 @AllArgsConstructor
 @Builder
-@RedisHash
+@RedisHash(value = "brand")
 public class AuthBrandCache {
 
     @TimeToLive(unit = TimeUnit.DAYS)
@@ -37,6 +37,6 @@ public class AuthBrandCache {
 
     private String description;
 
-    @CreatedDate
-    private LocalDateTime createdAt;
+    @Builder.Default
+    private LocalDateTime createdAt = LocalDateTime.now();
 }

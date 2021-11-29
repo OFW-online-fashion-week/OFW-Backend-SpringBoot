@@ -2,6 +2,7 @@ package com.ofw.ofw.entity.history;
 
 import com.ofw.ofw.entity.runway.Runway;
 import com.ofw.ofw.entity.user.User;
+import com.querydsl.core.annotations.QueryEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,6 +15,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Entity
+@QueryEntity
 public class History {
     @EmbeddedId
     private HistoryId historyId = new HistoryId();

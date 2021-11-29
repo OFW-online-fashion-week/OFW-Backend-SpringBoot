@@ -3,6 +3,7 @@ package com.ofw.ofw.entity.like;
 import com.ofw.ofw.entity.brand.Brand;
 import com.ofw.ofw.entity.runway.Runway;
 import com.ofw.ofw.entity.user.User;
+import com.querydsl.core.annotations.QueryEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,6 +16,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Entity
+@QueryEntity
 public class Like {
     @EmbeddedId
     @Builder.Default
