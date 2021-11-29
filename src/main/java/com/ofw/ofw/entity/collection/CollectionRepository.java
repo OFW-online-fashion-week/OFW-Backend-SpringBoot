@@ -10,5 +10,6 @@ import java.util.List;
 @Repository
 public interface CollectionRepository extends JpaRepository<Collection, Long>, QuerydslRepository {
     Page<Collection> findAllByOrderByCreatedAt(Pageable pageable);
-    List<Collection> findAllByBrand(Long brandId);
+    List<Collection> findAllByBrandId(Long brandId);
+    List<Collection> findAllByBrandIdAndImplementFalse(Long brandId);
 }
