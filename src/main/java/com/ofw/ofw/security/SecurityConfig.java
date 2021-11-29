@@ -35,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/auth/google").permitAll()
                 .antMatchers(HttpMethod.POST, "/auth/google").permitAll()
                 .antMatchers(HttpMethod.POST, "/auth/brand/signup").permitAll()
+                .antMatchers(HttpMethod.GET, "/auth/brand/login").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .anyRequest().authenticated()
                 .and().apply(new FilterConfigure(jwtTokenProvider, exceptionHandlerFilter, requestLogger));
