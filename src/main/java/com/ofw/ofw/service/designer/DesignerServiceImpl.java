@@ -6,8 +6,12 @@ import com.ofw.ofw.entity.designer.DesignerRepository;
 import com.ofw.ofw.payload.designer.request.CreateDesignerRequest;
 import com.ofw.ofw.payload.designer.response.CollectionDesignerResponse;
 import com.ofw.ofw.payload.designer.response.SearchDesignerResponse;
+import com.ofw.ofw.payload.designer.response.SearchDesignerResponseList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -17,10 +21,18 @@ public class DesignerServiceImpl implements DesignerService{
 
 
     @Override
-    public SearchDesignerResponse searchDesigner(String name){
-        SearchDesignerResponse designer = designerRepository.findByNameStartsWithIgnoreCase(name);
+    public SearchDesignerResponseList searchDesigner(String name){
+        List<Designer> designers = designerRepository.findByNameContaining(name);
 
-        return new SearchDesignerResponse(designer);
+        List<SearchDesignerResponse> designerResponses =
+                designers.stream().map(
+                        designer -> SearchDesignerResponse.builder()
+                                .name(designer.getName())
+                                .email(designer.getEmail())
+                                .build()
+                ).collect(Collectors.toList());
+
+        return new SearchDesignerResponseList(designerResponses);
     }
 
     @Override
