@@ -3,6 +3,7 @@ package com.ofw.ofw.security.jwt;
 import com.ofw.ofw.exception.type.ExpiredAccessTokenException;
 import com.ofw.ofw.exception.type.InvalidTokenException;
 import com.ofw.ofw.security.jwt.auth.AuthDetailsService;
+import com.ofw.ofw.security.jwt.auth.BrandDetailsService;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,6 +33,7 @@ public class JwtTokenProvider {
     private String prefix;
 
     private final AuthDetailsService authDetailsService;
+    private final BrandDetailsService brandDetailsService;
 
     public String generateAccessToken(String id, String aud) {
         return Jwts.builder()
@@ -58,8 +60,14 @@ public class JwtTokenProvider {
                 .getExpiration().after(new Date());
     }
 
-    public Authentication authentication(String token) {
+    public Authentication userAuthentication(String token) {
         UserDetails userDetails = authDetailsService
+                .loadUserByUsername(getTokenSubject(token));
+        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+    }
+
+    public Authentication brandAuthentication(String token) {
+        UserDetails userDetails = brandDetailsService
                 .loadUserByUsername(getTokenSubject(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
@@ -84,6 +92,6 @@ public class JwtTokenProvider {
     }
 
     public String getTokenAud(String token){
-        return Jwts.parser().setSigningKey(getSecretKey()).parseClaimsJws(token).getBody().getAudience();
+        return getTokenBody(token).getAudience();
     }
 }
