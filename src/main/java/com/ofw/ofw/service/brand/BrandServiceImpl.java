@@ -49,7 +49,7 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public void updateBrand(AuthRequestBrandRegisteringRequest request) {
-        Brand brand = brandRepository.findById(authenticationFacade.getUserId())
+        Brand brand = brandRepository.findById(authenticationFacade.getSub())
                 .orElseThrow(BrandNotFoundException::new);
         brandRepository.save(brand);
     }
