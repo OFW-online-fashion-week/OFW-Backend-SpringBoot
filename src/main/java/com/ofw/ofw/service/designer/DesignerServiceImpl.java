@@ -1,16 +1,11 @@
 package com.ofw.ofw.service.designer;
 
-import com.ofw.ofw.entity.brand.Brand;
-import com.ofw.ofw.entity.collection.Collection;
 import com.ofw.ofw.entity.collection.CollectionRepository;
-import com.ofw.ofw.entity.collection_designer.CollectionDesignerRepository;
 import com.ofw.ofw.entity.designer.Designer;
 import com.ofw.ofw.entity.designer.DesignerRepository;
-import com.ofw.ofw.exception.type.DesignerNotFoundException;
 import com.ofw.ofw.payload.designer.request.CreateDesignerRequest;
-import com.ofw.ofw.payload.designer.request.SearchDesignerRequest;
 import com.ofw.ofw.payload.designer.response.CollectionDesignerResponse;
-import com.ofw.ofw.payload.designer.response.SerachDesignerResponse;
+import com.ofw.ofw.payload.designer.response.SearchDesignerResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +17,10 @@ public class DesignerServiceImpl implements DesignerService{
 
 
     @Override
-    public SerachDesignerResponse searchDesigner(String name){
-        SerachDesignerResponse designer = designerRepository.findByNameStartsWithIgnoreCase(name);
+    public SearchDesignerResponse searchDesigner(String name){
+        SearchDesignerResponse designer = designerRepository.findByNameStartsWithIgnoreCase(name);
 
-        return new SerachDesignerResponse(designer);
+        return new SearchDesignerResponse(designer);
     }
 
     @Override
