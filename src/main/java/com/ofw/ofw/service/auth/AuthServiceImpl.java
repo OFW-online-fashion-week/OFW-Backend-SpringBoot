@@ -76,7 +76,25 @@ public class AuthServiceImpl implements AuthService{
         if(userRepository.findByEmail(email).isEmpty()) {
             throw new UserNotFoundException();
         }
+        return getToken(email, request.getAud());
+    }
 
+    @Override
+    public TokenResponse googleOauthSignUp(googleOauthSignUpRequest request){
+        GoogleTokenResponse response = googleAuthClient.getTokenByCode(
+                new GoogleTokenRequest(URLDecoder.decode(request.getCode(), StandardCharsets.UTF_8),
+                        googleClientId, googleClientSecret, googleRedirectUri, "authorization_code")
+        );
+
+        GoogleInfoResponse info = googleInfoClient.getInfo("Bearer " + response.getAccess_token());
+        String email = info.getEmail();
+
+        userRepository.save(
+                User.builder()
+                        .email(email)
+                        .name(request.getName())
+                        .build()
+        );
         return getToken(email, request.getAud());
     }
 
