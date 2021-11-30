@@ -22,7 +22,7 @@ public class AuthController {
         return new ResponseEntity<>(authService.getGoogleLink(), HttpStatus.OK);
     }
 
-    @PostMapping("/google")
+    @PostMapping("/user")
     public ResponseEntity<TokenResponse> getGoogleTokenByCode(@RequestBody GetGoogleTokenByCodeRequest request) {
         return new ResponseEntity<>(authService.getGoogleTokenByCode(request), HttpStatus.OK);
     }
