@@ -3,6 +3,7 @@ package com.ofw.ofw.security.jwt;
 import com.ofw.ofw.exception.type.ExpiredAccessTokenException;
 import com.ofw.ofw.exception.type.InvalidTokenException;
 import com.ofw.ofw.security.jwt.auth.AuthDetailsService;
+import com.ofw.ofw.security.jwt.auth.BrandDetails;
 import com.ofw.ofw.security.jwt.auth.BrandDetailsService;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
@@ -67,9 +68,9 @@ public class JwtTokenProvider {
     }
 
     public Authentication brandAuthentication(String token) {
-        UserDetails userDetails = brandDetailsService
+        BrandDetails brandDetails = brandDetailsService
                 .loadUserByUsername(getTokenSubject(token));
-        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(brandDetails, "", brandDetails.getAuthorities());
     }
 
     private Claims getTokenBody(String token) {
