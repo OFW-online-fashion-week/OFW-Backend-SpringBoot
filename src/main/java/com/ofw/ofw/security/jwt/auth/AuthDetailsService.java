@@ -18,7 +18,7 @@ public class AuthDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
         Long userId= Long.parseLong(id);
 
-        return userRepository.findByEmail(userId)
+        return userRepository.findById(userId)
                 .map(AuthDetails::new)
                 .orElseThrow(UserNotFoundException::new);
     }
