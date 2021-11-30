@@ -17,8 +17,9 @@ public enum ErrorCode {
     RUNWAY_NOT_FOUND(404, "Runway not found"),
     COLLECTION_NOT_FOUND(404, "Runway not found"),
     DESIGNER_NOT_FOUND(404, "Designer not found"),
-    MODEL_NOT_FOUND(404, "Model not found"),
-    PROFILE_NOT_FOUND(404, "Profile not found");
+    PROFILE_NOT_FOUND(404, "Profile not found"),
+    PASSWORD_NOT_FOUND(404, "Password not found"),
+    MODEL_NOT_FOUND(404, "Model not found");
 
     private final int status;
     private final String message;
