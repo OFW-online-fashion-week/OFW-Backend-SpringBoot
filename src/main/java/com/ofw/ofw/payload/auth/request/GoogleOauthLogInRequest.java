@@ -5,8 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class googleOauthSignUpRequest {
+public class GoogleOauthLogInRequest {
     private String code;
-    private String name;
     private String aud;
 }
