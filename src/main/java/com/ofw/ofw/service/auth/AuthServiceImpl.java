@@ -7,6 +7,7 @@ import com.ofw.ofw.entity.brand.BrandRepository;
 import com.ofw.ofw.entity.user.User;
 import com.ofw.ofw.entity.user.UserRepository;
 import com.ofw.ofw.exception.type.BrandNotFoundException;
+import com.ofw.ofw.exception.type.PasswordNotFoundException;
 import com.ofw.ofw.exception.type.UserNotFoundException;
 import com.ofw.ofw.payload.auth.request.GoogleOauthSignUpRequest;
 import com.ofw.ofw.payload.auth.request.AuthRequestBrandRegisteringRequest;
@@ -132,9 +133,15 @@ public class AuthServiceImpl implements AuthService{
     }
 
     public Brand verifyBrand(SignInBrandRequest request){
-        return brandRepository.findByEmail(request.getEmail())
-                .filter(brand -> passwordEncoder.matches(request.getPassword(), brand.getPassword()))
+        Brand brand = brandRepository.findByEmail(request.getEmail())
                 .orElseThrow(BrandNotFoundException::new);
+
+        Boolean passwordMatches = brand.getPassword().equals(request.getPassword());
+        if(!passwordMatches) {
+            throw new PasswordNotFoundException();
+        } else{
+            return brand;
+        }
     }
 
     public TokenResponse generateTokenResponse(Brand brand){
