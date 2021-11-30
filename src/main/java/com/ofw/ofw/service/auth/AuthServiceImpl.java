@@ -107,7 +107,7 @@ public class AuthServiceImpl implements AuthService{
         Brand brand = verifyBrand(request);
         TokenResponse response = generateTokenResponse(brand);
 
-        return response;
+        return new TokenResponse(response.toString());
     }
 
     public Brand verifyBrand(SignInBrandRequest request){
