@@ -82,4 +82,8 @@ public class JwtTokenProvider {
     private String getSecretKey() {
         return Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
+
+    public String getTokenAud(String token){
+        return Jwts.parser().setSigningKey(getSecretKey()).parseClaimsJws(token).getBody().getAudience();
+    }
 }
