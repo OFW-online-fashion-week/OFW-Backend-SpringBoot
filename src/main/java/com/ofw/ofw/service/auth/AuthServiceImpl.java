@@ -135,9 +135,7 @@ public class AuthServiceImpl implements AuthService{
 
     public TokenResponse generateTokenResponse(Brand brand){
         return TokenResponse.builder()
-                .accessToken(jwtTokenProvider.generateAccessToken(brand.getEmail(), "Brand"))
+                .accessToken(jwtTokenProvider.generateAccessToken(brand.getEmail(), "brand"))
                 .build();
     }
-
-
 }
