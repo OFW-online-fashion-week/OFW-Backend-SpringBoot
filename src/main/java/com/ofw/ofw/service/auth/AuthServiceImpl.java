@@ -68,7 +68,7 @@ public class AuthServiceImpl implements AuthService{
                         googleClientId, googleClientSecret, googleRedirectUri, "authorization_code")
         );
 
-        GoogleInfoResponse info = googleInfoClient.getInfo("Bearer" + response.getAccess_token());
+        GoogleInfoResponse info = googleInfoClient.getInfo("Bearer " + response.getAccess_token());
         String email = info.getEmail();
 
         if(userRepository.findByEmail(email).isEmpty()) {
