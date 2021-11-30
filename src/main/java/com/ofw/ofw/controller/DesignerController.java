@@ -3,6 +3,7 @@ package com.ofw.ofw.controller;
 import com.ofw.ofw.payload.designer.request.CreateDesignerRequest;
 import com.ofw.ofw.payload.designer.response.CollectionDesignerResponse;
 import com.ofw.ofw.payload.designer.response.SearchDesignerResponse;
+import com.ofw.ofw.payload.designer.response.SearchDesignerResponseList;
 import com.ofw.ofw.service.designer.DesignerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class DesignerController {
     }
 
     @GetMapping("/search/{name}")
-    public SearchDesignerResponse searchDesigner(@PathVariable String name) {
+    public SearchDesignerResponseList searchDesigner(@PathVariable String name) {
         return designerService.searchDesigner(name);
     }
 
