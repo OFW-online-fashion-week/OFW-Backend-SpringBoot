@@ -20,11 +20,11 @@ public class AuthController {
         return new ResponseEntity<>(authService.getGoogleLink(), HttpStatus.OK);
     }
 
-    @PostMapping("/user")
+    @PostMapping("/user/login")
     public ResponseEntity<TokenResponse> googleOauthLogIn(@RequestBody GoogleOauthLogInRequest request) {
         return new ResponseEntity<>(authService.googleOauthLogIn(request), HttpStatus.OK);
     }
-    
+
     @PostMapping("/user")
     public ResponseEntity<TokenResponse> googleOauthSignUp(@RequestBody GoogleOauthSignUpRequest request) {
         return new ResponseEntity<>(authService.googleOauthSignUp(request), HttpStatus.OK);
