@@ -78,8 +78,6 @@ public class AuthServiceImpl implements AuthService{
                         .name(request.getName())
                         .build()
             );
-        } else if (userRepository.findByEmail(email).isPresent()){
-            return getToken(email, request.getAud());
         }
 
         return getToken(email, request.getAud());
