@@ -2,6 +2,7 @@ package com.ofw.ofw.security.jwt.auth;
 
 import com.ofw.ofw.entity.brand.BrandRepository;
 import com.ofw.ofw.entity.user.UserRepository;
+import com.ofw.ofw.exception.type.BrandNotFoundException;
 import com.ofw.ofw.exception.type.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +20,6 @@ public class BrandDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return brandRepository.findByEmail(email)
                 .map(BrandDetails::new)
-                .orElseThrow(UserNotFoundException::new);
+                .orElseThrow(BrandNotFoundException::new);
     }
 }
