@@ -9,5 +9,5 @@ public interface AuthService {
     LinkResponse getGoogleLink();
     TokenResponse googleOauthSignUp(GoogleOauthSignUpRequest request);
     Object googleOauthLogIn(GoogleOauthLogInRequest request);
-    TokenResponse brandSignIn(SignInBrandRequest request);
+    Object brandSignIn(SignInBrandRequest request);
 }
