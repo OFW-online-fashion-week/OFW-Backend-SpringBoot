@@ -15,6 +15,7 @@ import com.ofw.ofw.payload.collection.response.CollectionContentResponse;
 import com.ofw.ofw.payload.collection.response.CollectionListResponse;
 import com.ofw.ofw.payload.collection.response.CollectionResponse;
 import com.ofw.ofw.security.facade.UserFacade;
+import com.ofw.ofw.security.jwt.auth.AuthenticationFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,7 @@ public class CollectionServiceImpl implements CollectionService {
     private final DesignerRepository designerRepository;
     private final CollectionDesignerRepository collectionDesignerRepository;
     private final BrandRepository brandRepository;
+    private final AuthenticationFacade authenticationFacade;
 
     @Override
     public CollectionListResponse getCollectionList(Pageable pageable) {
