@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -55,5 +56,15 @@ public class LikeServiceImpl implements LikeService {
         }
 
         return new LikeBrandListResponse(likeContentList);
+    }
+
+    @Override
+    public boolean isLike(Long brandId) {
+        Optional<Like> like = likeRepository.findById(LikeId.builder()
+                        .userId(authenticationFacade.getSub())
+                        .brandId(brandId)
+                .build());
+
+        return like.isEmpty();
     }
 }

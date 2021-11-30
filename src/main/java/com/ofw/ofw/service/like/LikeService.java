@@ -9,4 +9,6 @@ public interface LikeService {
     void userUnlikeBrand(Long brandId);
 
     LikeBrandListResponse getLikeBrandList();
+
+    boolean isLike(Long brandId);
 }

@@ -13,13 +13,13 @@ public class LikeController {
     private final LikeService likeService;
 
     @PostMapping
-    public String likeBrand(@RequestParam Long brandId) {
+    public String likeBrand(@RequestParam("brand_id") Long brandId) {
         likeService.userLikeBrand(brandId);
         return "success";
     }
 
     @DeleteMapping
-    public String unlikeBrand(@RequestParam Long brandId) {
+    public String unlikeBrand(@RequestParam("brand_id") Long brandId) {
         likeService.userUnlikeBrand(brandId);
         return "success";
     }
@@ -29,5 +29,8 @@ public class LikeController {
         return likeService.getLikeBrandList();
     }
 
-    // isLike 맹글어
+    @GetMapping("/is")
+    public boolean isUserLikeBrand(@RequestParam("brand_id") Long brandId) {
+        return likeService.isLike(brandId);
+    }
 }
