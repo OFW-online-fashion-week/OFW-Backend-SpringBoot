@@ -8,9 +8,9 @@ import com.ofw.ofw.entity.user.User;
 import com.ofw.ofw.entity.user.UserRepository;
 import com.ofw.ofw.exception.type.BrandNotFoundException;
 import com.ofw.ofw.exception.type.UserNotFoundException;
-import com.ofw.ofw.payload.auth.request.googleOauthSignUpRequest;
+import com.ofw.ofw.payload.auth.request.GoogleOauthSignUpRequest;
 import com.ofw.ofw.payload.auth.request.AuthRequestBrandRegisteringRequest;
-import com.ofw.ofw.payload.auth.request.googleOauthLogInRequest;
+import com.ofw.ofw.payload.auth.request.GoogleOauthLogInRequest;
 import com.ofw.ofw.payload.auth.request.SignInBrandRequest;
 import com.ofw.ofw.payload.auth.response.LinkResponse;
 import com.ofw.ofw.payload.auth.response.TokenResponse;
@@ -64,7 +64,7 @@ public class AuthServiceImpl implements AuthService{
     }
 
     @Override
-    public TokenResponse googleOauthLogIn(googleOauthLogInRequest request){
+    public TokenResponse googleOauthLogIn(GoogleOauthLogInRequest request){
         GoogleTokenResponse response = googleAuthClient.getTokenByCode(
                 new GoogleTokenRequest(URLDecoder.decode(request.getCode(), StandardCharsets.UTF_8),
                         googleClientId, googleClientSecret, googleRedirectUri, "authorization_code")
@@ -80,7 +80,7 @@ public class AuthServiceImpl implements AuthService{
     }
 
     @Override
-    public TokenResponse googleOauthSignUp(googleOauthSignUpRequest request){
+    public TokenResponse googleOauthSignUp(GoogleOauthSignUpRequest request){
         GoogleTokenResponse response = googleAuthClient.getTokenByCode(
                 new GoogleTokenRequest(URLDecoder.decode(request.getCode(), StandardCharsets.UTF_8),
                         googleClientId, googleClientSecret, googleRedirectUri, "authorization_code")
