@@ -135,13 +135,11 @@ public class AuthServiceImpl implements AuthService{
 
         String brandId = getBrand.getId().toString();
 
-        BrandSignInResponse brandSignInResponse = BrandSignInResponse.builder()
+        return BrandSignInResponse.builder()
                 .accessToken(tokenResponse.toString())
                 .id(brandId)
                 .aud("brand")
                 .build();
-
-        return brandSignInResponse;
     }
 
     public Brand verifyBrand(SignInBrandRequest request){
