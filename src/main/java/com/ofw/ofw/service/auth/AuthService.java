@@ -8,6 +8,6 @@ public interface AuthService {
     void requestBrandRegistering(AuthRequestBrandRegisteringRequest request);
     LinkResponse getGoogleLink();
     TokenResponse googleOauthSignUp(GoogleOauthSignUpRequest request);
-    TokenResponse googleOauthLogIn(GoogleOauthLogInRequest request);
+    Object googleOauthLogIn(GoogleOauthLogInRequest request);
     TokenResponse brandSignIn(SignInBrandRequest request);
 }
