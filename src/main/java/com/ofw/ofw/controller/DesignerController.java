@@ -15,15 +15,15 @@ public class DesignerController {
 
     private final DesignerService designerService;
 
-    @PostMapping()
+    @PostMapping
     public String createDesigner(@RequestBody CreateDesignerRequest request){
         designerService.createDesigner(request);
         return "success";
     }
 
-    @GetMapping("/search")
-    public SerachDesignerResponse searchDesigner(@RequestBody SearchDesignerRequest request) {
-        return designerService.searchDesigner(request);
+    @GetMapping("/search/{name}")
+    public SerachDesignerResponse searchDesigner(@PathVariable String name) {
+        return designerService.searchDesigner(name);
     }
 
     @GetMapping("/{collectionId}")
