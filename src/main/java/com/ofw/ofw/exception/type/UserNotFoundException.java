@@ -7,4 +7,8 @@ public class UserNotFoundException extends OfwException {
     public UserNotFoundException() {
         super(ErrorCode.USER_NOT_FOUND);
     }
+
+    public UserNotFoundException(String email) {
+        super(ErrorCode.USER_NOT_FOUND);
+    }
 }
