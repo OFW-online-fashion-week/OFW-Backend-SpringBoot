@@ -1,5 +1,6 @@
 package com.ofw.ofw.payload.designer.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,6 +17,7 @@ public class CreateDesignerRequest {
     String name;
 
     @NotNull
+    @JsonProperty("profile_path")
     String profilePath;
 
     String description;

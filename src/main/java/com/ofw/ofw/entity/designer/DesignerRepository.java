@@ -4,5 +4,5 @@ import com.ofw.ofw.payload.designer.response.SerachDesignerResponse;
 import org.springframework.data.repository.CrudRepository;
 
 public interface DesignerRepository extends CrudRepository<Designer, Long> {
-    SerachDesignerResponse findByName(String name);
+    SerachDesignerResponse findByNameStartsWithIgnoreCase(String name);
 }
