@@ -23,7 +23,7 @@ public class DesignerServiceImpl implements DesignerService{
 
     @Override
     public SerachDesignerResponse searchDesigner(String name){
-        SerachDesignerResponse designer = designerRepository.findByName(name);
+        SerachDesignerResponse designer = designerRepository.findByNameStartsWithIgnoreCase(name);
 
         return new SerachDesignerResponse(designer);
     }
