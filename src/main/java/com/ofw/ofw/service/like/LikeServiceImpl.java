@@ -26,7 +26,7 @@ public class LikeServiceImpl implements LikeService {
     @Override
     public void userLikeBrand(Long brandId) {
         Like like = Like.builder()
-                .likeId(LikeId.builder().brandId(brandId).userId(authenticationFacade.getUserId()).build())
+                .likeId(LikeId.builder().brandId(brandId).userId(authenticationFacade.getSub()).build())
                 .build();
 
         likeRepository.save(like);
@@ -34,12 +34,12 @@ public class LikeServiceImpl implements LikeService {
 
     @Override
     public void userUnlikeBrand(Long brandId) {
-        likeRepository.deleteById(LikeId.builder().brandId(brandId).userId(authenticationFacade.getUserId()).build());
+        likeRepository.deleteById(LikeId.builder().brandId(brandId).userId(authenticationFacade.getSub()).build());
     }
 
     @Override
     public LikeBrandListResponse getLikeBrandList() {
-        List<Like> likeList = likeRepository.findAllByUser(userRepository.findById(authenticationFacade.getUserId())
+        List<Like> likeList = likeRepository.findAllByUser(userRepository.findById(authenticationFacade.getSub())
                 .orElseThrow(UserNotFoundException::new));
         List<LikeBrandContentResponse> likeContentList = new ArrayList<>();
 
