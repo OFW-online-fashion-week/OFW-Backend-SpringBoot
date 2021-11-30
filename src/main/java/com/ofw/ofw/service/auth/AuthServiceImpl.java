@@ -13,6 +13,7 @@ import com.ofw.ofw.payload.auth.request.AuthRequestBrandRegisteringRequest;
 import com.ofw.ofw.payload.auth.request.GoogleOauthLogInRequest;
 import com.ofw.ofw.payload.auth.request.SignInBrandRequest;
 import com.ofw.ofw.payload.auth.response.LinkResponse;
+import com.ofw.ofw.payload.auth.response.NotFoundUserResponse;
 import com.ofw.ofw.payload.auth.response.TokenResponse;
 import com.ofw.ofw.security.jwt.JwtTokenProvider;
 import com.ofw.ofw.util.api.client.google.GoogleAuthClient;
@@ -29,6 +30,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -64,7 +66,7 @@ public class AuthServiceImpl implements AuthService{
     }
 
     @Override
-    public TokenResponse googleOauthLogIn(GoogleOauthLogInRequest request){
+    public Object googleOauthLogIn(GoogleOauthLogInRequest request){
         GoogleTokenResponse response = googleAuthClient.getTokenByCode(
                 new GoogleTokenRequest(URLDecoder.decode(request.getCode(), StandardCharsets.UTF_8),
                         googleClientId, googleClientSecret, googleRedirectUri, "authorization_code")
@@ -74,28 +76,25 @@ public class AuthServiceImpl implements AuthService{
         String email = info.getEmail();
 
         if(userRepository.findByEmail(email).isEmpty()) {
-            throw new UserNotFoundException();
+            return NotFoundUserResponse.builder()
+                    .isFresh(true)
+                    .email(email)
+                    .build();
         }
         return getToken(email, request.getAud());
     }
 
     @Override
     public TokenResponse googleOauthSignUp(GoogleOauthSignUpRequest request){
-        GoogleTokenResponse response = googleAuthClient.getTokenByCode(
-                new GoogleTokenRequest(URLDecoder.decode(request.getCode(), StandardCharsets.UTF_8),
-                        googleClientId, googleClientSecret, googleRedirectUri, "authorization_code")
-        );
-
-        GoogleInfoResponse info = googleInfoClient.getInfo("Bearer " + response.getAccess_token());
-        String email = info.getEmail();
-
-        userRepository.save(
+        User user = userRepository.save(
                 User.builder()
-                        .email(email)
+                        .email(request.getEmail())
                         .name(request.getName())
                         .build()
         );
-        return getToken(email, request.getAud());
+        String userId = user.getId().toString();
+
+        return getToken(userId, request.getAud());
     }
 
     private TokenResponse getToken(String email, String aud) {
