@@ -136,7 +136,7 @@ public class AuthServiceImpl implements AuthService{
         String brandId = getBrand.getId().toString();
 
         return BrandSignInResponse.builder()
-                .accessToken(tokenResponse.toString())
+                .accessToken(tokenResponse.getAccessToken())
                 .id(brandId)
                 .aud("brand")
                 .build();
@@ -156,7 +156,7 @@ public class AuthServiceImpl implements AuthService{
 
     public TokenResponse generateTokenResponse(Brand brand){
         return TokenResponse.builder()
-                .accessToken(jwtTokenProvider.generateAccessToken(brand.getEmail(), "brand"))
+                .accessToken(jwtTokenProvider.generateAccessToken(brand.getId().toString(), "brand"))
                 .build();
     }
 }
