@@ -6,7 +6,7 @@ import com.ofw.ofw.payload.designer.response.CollectionDesignerResponse;
 import com.ofw.ofw.payload.designer.response.SerachDesignerResponse;
 
 public interface DesignerService {
-    SerachDesignerResponse searchDesigner(SearchDesignerRequest request);
+    SerachDesignerResponse searchDesigner(String name);
     CollectionDesignerResponse getDesigner(Long collectionId);
     void createDesigner(CreateDesignerRequest request);
 }
