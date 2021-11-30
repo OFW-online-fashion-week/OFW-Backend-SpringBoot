@@ -21,6 +21,11 @@ public class AuthController {
     }
 
     @PostMapping("/user")
+    public ResponseEntity<TokenResponse> googleOauthLogIn(@RequestBody GoogleOauthLogInRequest request) {
+        return new ResponseEntity<>(authService.googleOauthLogIn(request), HttpStatus.OK);
+    }
+    
+    @PostMapping("/user")
     public ResponseEntity<TokenResponse> googleOauthSignUp(@RequestBody GoogleOauthSignUpRequest request) {
         return new ResponseEntity<>(authService.googleOauthSignUp(request), HttpStatus.OK);
     }
