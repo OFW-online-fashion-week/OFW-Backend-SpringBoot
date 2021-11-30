@@ -13,6 +13,7 @@ import com.ofw.ofw.payload.auth.request.GoogleOauthSignUpRequest;
 import com.ofw.ofw.payload.auth.request.AuthRequestBrandRegisteringRequest;
 import com.ofw.ofw.payload.auth.request.GoogleOauthLogInRequest;
 import com.ofw.ofw.payload.auth.request.SignInBrandRequest;
+import com.ofw.ofw.payload.auth.response.BrandSignInResponse;
 import com.ofw.ofw.payload.auth.response.LinkResponse;
 import com.ofw.ofw.payload.auth.response.NotFoundUserResponse;
 import com.ofw.ofw.payload.auth.response.TokenResponse;
@@ -125,11 +126,22 @@ public class AuthServiceImpl implements AuthService{
     }
 
     @Override
-    public TokenResponse brandSignIn(SignInBrandRequest request){
+    public Object brandSignIn(SignInBrandRequest request){
         Brand brand = verifyBrand(request);
-        TokenResponse response = generateTokenResponse(brand);
+        TokenResponse tokenResponse = generateTokenResponse(brand);
 
-        return new TokenResponse(response.toString());
+        Brand getBrand = brandRepository.findByEmail(request.getEmail())
+                .orElseThrow(BrandNotFoundException::new);
+
+        String brandId = getBrand.getId().toString();
+
+        BrandSignInResponse brandSignInResponse = BrandSignInResponse.builder()
+                .accessToken(tokenResponse.toString())
+                .id(brandId)
+                .aud("brand")
+                .build();
+
+        return brandSignInResponse;
     }
 
     public Brand verifyBrand(SignInBrandRequest request){
