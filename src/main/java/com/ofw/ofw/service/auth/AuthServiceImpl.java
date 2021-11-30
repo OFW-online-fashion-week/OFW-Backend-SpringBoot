@@ -21,7 +21,8 @@ import com.ofw.ofw.util.api.dto.google.response.GoogleTokenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -47,6 +48,7 @@ public class AuthServiceImpl implements AuthService{
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthBrandCacheRepository repository;
     private final BrandRepository brandRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public LinkResponse getGoogleLink() {
@@ -79,7 +81,7 @@ public class AuthServiceImpl implements AuthService{
         } else if (userRepository.findByEmail(email).isPresent()){
             return getToken(email, request.getAud());
         }
-        
+
         return getToken(email, request.getAud());
     }
 
@@ -114,6 +116,7 @@ public class AuthServiceImpl implements AuthService{
 
     public Brand verifyBrand(SignInBrandRequest request){
         return brandRepository.findByEmail(request.getEmail())
+                .filter(user -> passwordEncoder.matches(request.getPassword(), user.getPassword()))
                 .orElseThrow(BrandNotFoundException::new);
     }
 
