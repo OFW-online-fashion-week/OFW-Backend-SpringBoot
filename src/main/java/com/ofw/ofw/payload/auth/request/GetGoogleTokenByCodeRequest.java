@@ -8,6 +8,5 @@ import lombok.NoArgsConstructor;
 public class GetGoogleTokenByCodeRequest {
 
     private String code;
-    private String name;
     private String aud;
 }
