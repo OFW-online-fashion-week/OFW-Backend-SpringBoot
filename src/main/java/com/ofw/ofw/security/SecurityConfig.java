@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, "/admin/{id}").permitAll()
                 .antMatchers(HttpMethod.GET, "/brand").permitAll()
                 .antMatchers(HttpMethod.GET, "/brand/{brand_id}").permitAll()
-                .antMatchers(HttpMethod.GET, "/designer/search/:name").permitAll()
+                .antMatchers(HttpMethod.GET, "/designer/search/{name}").permitAll()
                 .anyRequest().authenticated()
                 .and().apply(new FilterConfigure(jwtTokenProvider, exceptionHandlerFilter, requestLogger));
     }
