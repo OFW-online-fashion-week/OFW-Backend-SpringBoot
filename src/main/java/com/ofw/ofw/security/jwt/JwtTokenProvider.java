@@ -33,11 +33,11 @@ public class JwtTokenProvider {
 
     private final AuthDetailsService authDetailsService;
 
-    public String generateAccessToken(String email, String aud) {
+    public String generateAccessToken(String id, String aud) {
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256, getSecretKey())
                 .setHeaderParam("typ", "JWT")
-                .setSubject(email)
+                .setSubject(id)
                 .setAudience(aud)
                 .claim("type", "access")
                 .setIssuedAt(new Date())
