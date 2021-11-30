@@ -21,14 +21,14 @@ public class DesignerController {
         return "success";
     }
 
-    @GetMapping("/search")
-    public SerachDesignerResponse searchDesigner(@RequestBody SearchDesignerRequest request) {
-        return designerService.searchDesigner(request);
-    }
-
     @GetMapping("/{collectionId}")
     public CollectionDesignerResponse getDesigner(@PathVariable Long collectionId){
         return designerService.getDesigner(collectionId);
+    }
+
+    @GetMapping("/search")
+    public SerachDesignerResponse searchDesigner(@RequestBody SearchDesignerRequest request) {
+        return designerService.searchDesigner(request);
     }
 
 }
