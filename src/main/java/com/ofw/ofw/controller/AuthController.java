@@ -39,7 +39,7 @@ public class AuthController {
 
     @PostMapping("/brand/login")
     @ResponseStatus(HttpStatus.CREATED)
-    public TokenResponse brandSignIn(@RequestBody SignInBrandRequest request){
+    public Object brandSignIn(@RequestBody SignInBrandRequest request){
         return authService.brandSignIn(request);
     }
 }
