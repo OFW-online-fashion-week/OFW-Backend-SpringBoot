@@ -2,6 +2,7 @@ package com.ofw.ofw.controller;
 
 import com.ofw.ofw.payload.auth.request.AuthRequestBrandRegisteringRequest;
 import com.ofw.ofw.payload.auth.request.GetGoogleTokenByCodeRequest;
+import com.ofw.ofw.payload.auth.request.GoogleOauthSignUpRequest;
 import com.ofw.ofw.payload.auth.request.SignInBrandRequest;
 import com.ofw.ofw.payload.auth.response.LinkResponse;
 import com.ofw.ofw.payload.auth.response.TokenResponse;
@@ -23,8 +24,8 @@ public class AuthController {
     }
 
     @PostMapping("/user")
-    public ResponseEntity<TokenResponse> getGoogleTokenByCode(@RequestBody GetGoogleTokenByCodeRequest request) {
-        return new ResponseEntity<>(authService.getGoogleTokenByCode(request), HttpStatus.OK);
+    public ResponseEntity<TokenResponse> getGoogleTokenByCode(@RequestBody GoogleOauthSignUpRequest request) {
+        return new ResponseEntity<>(authService.googleOauthSignUp(request), HttpStatus.OK);
     }
 
     @PostMapping("/brand/signup")
