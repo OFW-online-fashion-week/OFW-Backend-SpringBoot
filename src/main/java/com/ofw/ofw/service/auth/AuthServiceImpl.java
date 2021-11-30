@@ -133,7 +133,7 @@ public class AuthServiceImpl implements AuthService{
 
     public Brand verifyBrand(SignInBrandRequest request){
         return brandRepository.findByEmail(request.getEmail())
-                .filter(user -> passwordEncoder.matches(request.getPassword(), user.getPassword()))
+                .filter(brand -> passwordEncoder.matches(request.getPassword(), brand.getPassword()))
                 .orElseThrow(BrandNotFoundException::new);
     }
 
