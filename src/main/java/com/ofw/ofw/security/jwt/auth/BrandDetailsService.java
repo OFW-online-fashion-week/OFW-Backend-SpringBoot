@@ -17,7 +17,7 @@ public class BrandDetailsService implements UserDetailsService {
     private final BrandRepository brandRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public BrandDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return brandRepository.findByEmail(email)
                 .map(BrandDetails::new)
                 .orElseThrow(BrandNotFoundException::new);
