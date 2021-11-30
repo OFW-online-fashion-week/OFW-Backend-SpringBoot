@@ -7,7 +7,7 @@ import com.ofw.ofw.payload.auth.response.TokenResponse;
 public interface AuthService {
     void requestBrandRegistering(AuthRequestBrandRegisteringRequest request);
     LinkResponse getGoogleLink();
-    TokenResponse googleOauthSignUp(googleOauthSignUpRequest request);
-    TokenResponse googleOauthLogIn(googleOauthLogInRequest request);
+    TokenResponse googleOauthSignUp(GoogleOauthSignUpRequest request);
+    TokenResponse googleOauthLogIn(GoogleOauthLogInRequest request);
     TokenResponse brandSignIn(SignInBrandRequest request);
 }
