@@ -77,6 +77,7 @@ public class AuthServiceImpl implements AuthService{
 
         User user = userRepository.findByEmail(email)
                 .orElseThrow(UserNotFoundException::new);
+        String userId = user.getId().toString();
 
         if(userRepository.findByEmail(email).isEmpty()) {
             return NotFoundUserResponse.builder()
@@ -85,7 +86,7 @@ public class AuthServiceImpl implements AuthService{
                     .build();
         }
 
-        return getToken(user.getId().toString(), request.getAud());
+        return getToken(userId, request.getAud());
     }
 
     @Override
