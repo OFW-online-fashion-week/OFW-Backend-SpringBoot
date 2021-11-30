@@ -15,6 +15,12 @@ public class DesignerController {
 
     private final DesignerService designerService;
 
+    @PostMapping()
+    public String createDesigner(@RequestBody CreateDesignerRequest request){
+        designerService.createDesigner(request);
+        return "success";
+    }
+
     @GetMapping("/search")
     public SerachDesignerResponse searchDesigner(@RequestBody SearchDesignerRequest request) {
         return designerService.searchDesigner(request);
@@ -25,9 +31,4 @@ public class DesignerController {
         return designerService.getDesigner(collectionId);
     }
 
-    @PostMapping()
-    public String createDesigner(@RequestBody CreateDesignerRequest request){
-        designerService.createDesigner(request);
-        return "success";
-    }
 }
