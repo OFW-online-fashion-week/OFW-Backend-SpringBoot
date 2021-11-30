@@ -8,13 +8,13 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SerachDesignerResponse {
+public class SearchDesignerResponse {
     private String name;
 
     private String email;
 
     @Builder
-    public SerachDesignerResponse(SerachDesignerResponse searchDesigner){
+    public SearchDesignerResponse(SearchDesignerResponse searchDesigner){
         this.name = searchDesigner.getName();
         this.email = searchDesigner.getEmail();
     }
