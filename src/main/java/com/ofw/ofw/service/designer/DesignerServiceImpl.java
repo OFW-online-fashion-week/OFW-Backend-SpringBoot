@@ -22,8 +22,8 @@ public class DesignerServiceImpl implements DesignerService{
 
 
     @Override
-    public SerachDesignerResponse searchDesigner(SearchDesignerRequest request){
-        SerachDesignerResponse designer = designerRepository.findByName(request.getName());
+    public SerachDesignerResponse searchDesigner(String name){
+        SerachDesignerResponse designer = designerRepository.findByName(name);
 
         return new SerachDesignerResponse(designer);
     }
