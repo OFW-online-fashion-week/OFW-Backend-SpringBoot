@@ -16,4 +16,6 @@ public class RunwayContentResponse {
 
     @JsonProperty("runway_url")
     private String runwayUrl;
+
+    private Integer count;
 }
