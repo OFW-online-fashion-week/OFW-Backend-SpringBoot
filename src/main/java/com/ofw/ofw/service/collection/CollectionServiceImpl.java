@@ -35,7 +35,6 @@ public class CollectionServiceImpl implements CollectionService {
     private final DesignerRepository designerRepository;
     private final CollectionDesignerRepository collectionDesignerRepository;
     private final BrandRepository brandRepository;
-    private final AuthenticationFacade authenticationFacade;
     private final EmailService emailService;
 
     @Override
