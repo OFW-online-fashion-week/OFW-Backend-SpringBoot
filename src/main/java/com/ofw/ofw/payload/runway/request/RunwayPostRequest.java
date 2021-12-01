@@ -19,10 +19,6 @@ public class RunwayPostRequest {
     private Long collectionId;
 
     @NotNull
-    @JsonProperty("brand_id")
-    private Long brandId;
-
-    @NotNull
     @JsonProperty("model_id")
     private Long modelId;
 
