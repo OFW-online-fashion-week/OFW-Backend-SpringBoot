@@ -27,6 +27,7 @@ public class DesignerServiceImpl implements DesignerService{
         List<SearchDesignerResponse> designerResponses =
                 designers.stream().map(
                         designer -> SearchDesignerResponse.builder()
+                                .id(designer.getId().toString())
                                 .name(designer.getName())
                                 .email(designer.getEmail())
                                 .build()
