@@ -25,7 +25,7 @@ public class ClothesController {
     }
 
     @PostMapping
-    public String createClothes(ClothesPostRequest request) {
+    public String createClothes(@RequestBody ClothesPostRequest request) {
         clothesService.postClothes(request);
         return "success";
     }
