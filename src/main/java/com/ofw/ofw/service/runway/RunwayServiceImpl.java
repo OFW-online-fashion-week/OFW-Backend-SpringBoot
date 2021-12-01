@@ -11,10 +11,7 @@ import com.ofw.ofw.entity.model.ModelRepository;
 import com.ofw.ofw.entity.runway.Runway;
 import com.ofw.ofw.entity.runway.RunwayRepository;
 import com.ofw.ofw.entity.user.UserRepository;
-import com.ofw.ofw.exception.type.CollectionNotFoundException;
-import com.ofw.ofw.exception.type.ModelNotFoundException;
-import com.ofw.ofw.exception.type.RunwayNotFoundException;
-import com.ofw.ofw.exception.type.UserNotFoundException;
+import com.ofw.ofw.exception.type.*;
 import com.ofw.ofw.payload.runway.request.RunwayPostRequest;
 import com.ofw.ofw.payload.runway.response.RunwayContentResponse;
 import com.ofw.ofw.payload.runway.response.RunwayDetailResponse;
@@ -37,6 +34,7 @@ public class RunwayServiceImpl implements RunwayService {
     private final HistoryRepository historyRepository;
     private final UserRepository userRepository;
     private final AuthenticationFacade authenticationFacade;
+    private final ClothesRepository clothesRepository;
 
     @Override
     public void postRunway(RunwayPostRequest request) {
@@ -54,10 +52,8 @@ public class RunwayServiceImpl implements RunwayService {
         for (Long clothesId : request.getClothesId()) {
             clothes.add(
                     ClothesHasRunway.builder()
-                            .runwayId(ClothesHasRunwayId.builder()
-                                    .runwayId(createdRunway.getId())
-                                    .clothesId(clothesId)
-                                    .build())
+                            .clothes(clothesRepository.findById(clothesId).orElseThrow(ClothesNotFoundException::new))
+                            .runway(createdRunway)
                             .build()
             );
         }
