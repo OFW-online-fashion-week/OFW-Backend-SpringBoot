@@ -1,5 +1,6 @@
 package com.ofw.ofw.payload.collection.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,8 +18,10 @@ public class CreateCollectionRequest {
     private String description;
 
     @NotNull
+    @JsonProperty("designer_id")
     private Long designerId;
 
     @NotNull
+    @JsonProperty("brand_id")
     private Long brandId;
 }
