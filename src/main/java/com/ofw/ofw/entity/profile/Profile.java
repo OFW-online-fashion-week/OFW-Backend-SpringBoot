@@ -17,10 +17,10 @@ import javax.persistence.*;
 @QueryEntity
 public class Profile {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @MapsId("model_id")
     @JoinColumn(name = "model_id")
     private Model model;
 
