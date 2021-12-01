@@ -15,7 +15,7 @@ public class RunwayController {
     private final RunwayService runwayService;
 
     @PostMapping
-    public String postRunway(RunwayPostRequest request) {
+    public String postRunway(@RequestBody RunwayPostRequest request) {
         runwayService.postRunway(request);
         return "access";
     }
