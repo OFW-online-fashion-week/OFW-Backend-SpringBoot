@@ -46,7 +46,6 @@ public class BrandServiceImpl implements BrandService {
                         .build())
                 .orElseThrow(BrandNotFoundException::new);
     }
-
     @Override
     public void updateBrand(AuthRequestBrandRegisteringRequest request) {
         Brand brand = brandRepository.findById(authenticationFacade.getSub())
