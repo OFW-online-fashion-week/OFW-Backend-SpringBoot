@@ -59,6 +59,7 @@ public class EmailServiceImpl implements EmailService {
 
         List<Like> likeList = likeRepository.findAllByBrand(brandRepository.findById(brandId)
                 .orElseThrow(BrandNotFoundException::new));
+        if (likeList.isEmpty()) return;
         String[] emailList = new String[likeList.size()];
         for (int i = 0; i < likeList.size(); i++) {
             emailList[i] = likeList.get(i).getUser().getEmail();
