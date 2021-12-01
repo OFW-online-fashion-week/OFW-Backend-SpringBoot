@@ -47,7 +47,7 @@ public class CollectionServiceImpl implements CollectionService {
                                 collection -> CollectionContentResponse.builder()
                                         .description(collection.getDescription())
                                         .title(collection.getTitle())
-                                        .runwayPath(collection.getRunways().isEmpty() ? collection.getRunways().get(0).getRunwayPath() : null)
+                                        .runwayPath(collection.getRunways().isEmpty() ? null : collection.getRunways().get(0).getRunwayPath())
                                         .build())
                         .collect(Collectors.toList());
         return new CollectionListResponse(contentResponses);
@@ -110,7 +110,7 @@ public class CollectionServiceImpl implements CollectionService {
                                 collection -> CollectionContentResponse.builder()
                                         .description(collection.getDescription())
                                         .title(collection.getTitle())
-                                        .runwayPath(collection.getRunways().isEmpty() ? collection.getRunways().get(0).getRunwayPath() : null)
+                                        .runwayPath(collection.getRunways().isEmpty() ? null : collection.getRunways().get(0).getRunwayPath())
                                         .build())
                         .collect(Collectors.toList());
         return new BrandCollectionListResponse(brandContentResponses);
