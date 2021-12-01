@@ -1,6 +1,6 @@
 package com.ofw.ofw.entity.model;
 
-import com.ofw.ofw.entity.brand.Brand;
+import com.ofw.ofw.entity.profile.Profile;
 import com.querydsl.core.annotations.QueryEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,4 +28,8 @@ public class Model {
 
     @Column(nullable = false, length = 250)
     private String profilePath;
+
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "model")
+    private Profile profile;
 }
