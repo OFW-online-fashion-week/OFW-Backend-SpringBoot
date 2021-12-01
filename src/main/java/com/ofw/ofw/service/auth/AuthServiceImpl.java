@@ -77,16 +77,16 @@ public class AuthServiceImpl implements AuthService{
         GoogleInfoResponse info = googleInfoClient.getInfo("Bearer " + response.getAccess_token());
         String email = info.getEmail();
 
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(UserNotFoundException::new);
-        String userId = user.getId().toString();
-
         if(userRepository.findByEmail(email).isEmpty()) {
             return NotFoundUserResponse.builder()
                     .isFresh(true)
                     .email(email)
                     .build();
         }
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(UserNotFoundException::new);
+        String userId = user.getId().toString();
 
         return getToken(userId, request.getAud());
     }
