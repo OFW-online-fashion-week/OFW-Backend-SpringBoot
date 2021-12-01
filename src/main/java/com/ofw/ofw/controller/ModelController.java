@@ -30,7 +30,7 @@ public class ModelController {
     }
 
     @PostMapping
-    public String createModel(ModelPostRequest request) {
+    public String createModel(@RequestBody ModelPostRequest request) {
         modelService.postModel(request);
         return "success";
     }
