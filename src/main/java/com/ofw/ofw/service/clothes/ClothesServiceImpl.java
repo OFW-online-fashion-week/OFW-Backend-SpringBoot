@@ -30,6 +30,7 @@ public class ClothesServiceImpl implements ClothesService {
         for (Clothes clothes : clothesList) {
             clothesContentList.add(
                     ClothesSearchContentResponse.builder()
+                            .id(clothes.getId())
                             .name(clothes.getName())
                             .styleCode(clothes.getStyleCode())
                             .build()

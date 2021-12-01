@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ClothesSearchContentResponse {
 
+    private Long id;
+
     private String name;
 
     @JsonProperty("style_code")
