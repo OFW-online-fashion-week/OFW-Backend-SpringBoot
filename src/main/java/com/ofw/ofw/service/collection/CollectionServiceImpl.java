@@ -8,6 +8,7 @@ import com.ofw.ofw.entity.collection_designer.CollectionDesigner;
 import com.ofw.ofw.entity.collection_designer.CollectionDesignerRepository;
 import com.ofw.ofw.entity.designer.Designer;
 import com.ofw.ofw.entity.designer.DesignerRepository;
+import com.ofw.ofw.exception.type.CollectionNotFoundException;
 import com.ofw.ofw.exception.type.DesignerNotFoundException;
 import com.ofw.ofw.payload.collection.request.CreateCollectionRequest;
 import com.ofw.ofw.payload.collection.response.BrandCollectionListResponse;
@@ -16,6 +17,7 @@ import com.ofw.ofw.payload.collection.response.CollectionListResponse;
 import com.ofw.ofw.payload.collection.response.CollectionResponse;
 import com.ofw.ofw.security.facade.UserFacade;
 import com.ofw.ofw.security.jwt.auth.AuthenticationFacade;
+import com.ofw.ofw.service.email.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,7 @@ public class CollectionServiceImpl implements CollectionService {
     private final CollectionDesignerRepository collectionDesignerRepository;
     private final BrandRepository brandRepository;
     private final AuthenticationFacade authenticationFacade;
+    private final EmailService emailService;
 
     @Override
     public CollectionListResponse getCollectionList(Pageable pageable) {
@@ -75,6 +78,19 @@ public class CollectionServiceImpl implements CollectionService {
                 .designer(designer)
                 .build();
         collectionDesignerRepository.save(collectionDesigner);
+    }
+
+    @Override
+    public void submitCollection(Long collectionId) {
+        Collection collection = collectionRepository.findById(collectionId).orElseThrow(CollectionNotFoundException::new);
+        collectionRepository.save(Collection.builder()
+                .title(collection.getTitle())
+                .description(collection.getDescription())
+                .brand(collection.getBrand())
+                .implement(true)
+                .build());
+
+        emailService.sendNewCollectionNoticeForm(collection.getBrand().getId());
     }
 
     @Override

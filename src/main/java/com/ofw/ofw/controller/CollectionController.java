@@ -5,6 +5,7 @@ import com.ofw.ofw.payload.collection.response.BrandCollectionListResponse;
 import com.ofw.ofw.payload.collection.response.CollectionListResponse;
 import com.ofw.ofw.payload.collection.response.CollectionResponse;
 import com.ofw.ofw.service.collection.CollectionService;
+import com.ofw.ofw.service.email.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,12 @@ public class CollectionController {
     @ResponseStatus(HttpStatus.CREATED)
     public String createCollection(@RequestBody CreateCollectionRequest request){
         collectionService.createCollection(request);
+        return "success";
+    }
+
+    @PostMapping("/submit")
+    public String collectionSubmit(@RequestParam("collection_id") Long collectionId) {
+        collectionService.submitCollection(collectionId);
         return "success";
     }
 

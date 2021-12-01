@@ -10,5 +10,6 @@ public interface CollectionService {
     CollectionListResponse getCollectionList(Pageable pageable);
     CollectionResponse getCollection(Long collectionId);
     void createCollection(CreateCollectionRequest request);
+    void submitCollection(Long collectionId);
     BrandCollectionListResponse getBrandCollectionList(Long brandId);
 }
