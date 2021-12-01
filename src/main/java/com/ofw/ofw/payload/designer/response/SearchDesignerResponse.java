@@ -10,11 +10,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 public class SearchDesignerResponse {
+    private String id;
+
     private String name;
 
     private String email;
 
     public SearchDesignerResponse(SearchDesignerResponse searchDesigner){
+        this.id = searchDesigner.getId();
         this.name = searchDesigner.getName();
         this.email = searchDesigner.getEmail();
     }
