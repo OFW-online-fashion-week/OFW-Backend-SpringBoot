@@ -30,9 +30,8 @@ public class CollectionController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public String createCollection(@RequestBody CreateCollectionRequest request){
-        collectionService.createCollection(request);
-        return "success";
+    public Long createCollection(@RequestBody CreateCollectionRequest request){
+        return collectionService.createCollection(request);
     }
 
     @PostMapping("/submit")

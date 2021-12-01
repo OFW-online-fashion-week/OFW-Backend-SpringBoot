@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 public interface CollectionService {
     CollectionListResponse getCollectionList(Pageable pageable);
     CollectionResponse getCollection(Long collectionId);
-    void createCollection(CreateCollectionRequest request);
+    Long createCollection(CreateCollectionRequest request);
     void submitCollection(Long collectionId);
     BrandCollectionListResponse getBrandCollectionList(Long brandId);
 }

@@ -60,7 +60,7 @@ public class CollectionServiceImpl implements CollectionService {
     }
 
     @Override
-    public void createCollection(CreateCollectionRequest request) {
+    public Long createCollection(CreateCollectionRequest request) {
         Designer designer = designerRepository.findById(request.getDesignerId())
                 .orElseThrow(DesignerNotFoundException::new);
 
@@ -70,13 +70,15 @@ public class CollectionServiceImpl implements CollectionService {
                 .brand(Brand.builder().id(request.getBrandId()).build())
                 .implement(false)
                 .build();
-        collectionRepository.save(collection);
+        Collection newCollection = collectionRepository.save(collection);
 
         CollectionDesigner collectionDesigner = CollectionDesigner.builder()
                 .collection(collection)
                 .designer(designer)
                 .build();
         collectionDesignerRepository.save(collectionDesigner);
+
+        return newCollection.getId();
     }
 
     @Override
