@@ -91,7 +91,7 @@ public class CollectionServiceImpl implements CollectionService {
                 .implement(true)
                 .build());
 
-        emailService.sendNewCollectionNoticeForm(collection.getBrand().getId());
+        emailService.sendNewCollectionNoticeForm(collection.getBrand());
     }
 
     @Override

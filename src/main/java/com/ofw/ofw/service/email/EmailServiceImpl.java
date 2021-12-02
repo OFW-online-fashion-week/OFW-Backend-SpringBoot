@@ -49,16 +49,12 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     @SneakyThrows
-    public void sendNewCollectionNoticeForm(Long brandId) {
+    public void sendNewCollectionNoticeForm(Brand brand) {
         InputStream inputStream = new ClassPathResource("templates/email/NewCollectionNoticeForm.html").getInputStream();
 
         String body = getEmailBody(inputStream);
 
-        Brand brand = brandRepository.findById(brandId)
-                .orElseThrow(BrandCacheNotFoundException::new);
-
-        List<Like> likeList = likeRepository.findAllByBrand(brandRepository.findById(brandId)
-                .orElseThrow(BrandNotFoundException::new));
+        List<Like> likeList = likeRepository.findAllByBrand(brand);
         if (likeList.isEmpty()) return;
         String[] emailList = new String[likeList.size()];
         for (int i = 0; i < likeList.size(); i++) {
