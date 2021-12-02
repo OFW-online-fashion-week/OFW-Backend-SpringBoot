@@ -40,7 +40,7 @@ public class RunwayServiceImpl implements RunwayService {
     public void postRunway(RunwayPostRequest request) {
         Runway runway = Runway.builder()
                 .runwayPath(request.getRunwayUrl())
-                .bgmPath(request.getRunwayUrl())
+                .bgmPath(request.getBgmUrl())
                 .collection(collectionRepository.findById(request.getCollectionId())
                         .orElseThrow(RunwayNotFoundException::new))
                 .model(modelRepository.findById(request.getModelId()).orElseThrow(ModelNotFoundException::new))
