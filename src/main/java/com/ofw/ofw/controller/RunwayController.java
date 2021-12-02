@@ -21,18 +21,18 @@ public class RunwayController {
     }
 
     @DeleteMapping
-    public String deleteRunway(@RequestParam Long runwayId) {
+    public String deleteRunway(@RequestParam("runway_id") Long runwayId) {
         runwayService.deleteRunway(runwayId);
         return "success";
     }
 
     @GetMapping("/brand")
-    public RunwayListResponse getRunways(@RequestParam Long collectionId) {
+    public RunwayListResponse getRunways(@RequestParam("collection_id") Long collectionId) {
         return runwayService.getRunwayList(collectionId);
     }
 
     @GetMapping
-    public RunwayDetailResponse getRunway(@RequestParam Long runwayId) {
+    public RunwayDetailResponse getRunway(@RequestParam("runway_id") Long runwayId) {
         return runwayService.getRunwayDetail(runwayId);
     }
 }
