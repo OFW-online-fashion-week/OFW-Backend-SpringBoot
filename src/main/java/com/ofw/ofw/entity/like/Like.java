@@ -15,7 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
+@Entity(name = "user_like_brand")
 @QueryEntity
 public class Like {
     @EmbeddedId
