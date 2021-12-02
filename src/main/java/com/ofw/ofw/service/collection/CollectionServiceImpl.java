@@ -85,10 +85,12 @@ public class CollectionServiceImpl implements CollectionService {
     public void submitCollection(Long collectionId) {
         Collection collection = collectionRepository.findById(collectionId).orElseThrow(CollectionNotFoundException::new);
         collectionRepository.save(Collection.builder()
+                .id(collection.getId())
                 .title(collection.getTitle())
                 .description(collection.getDescription())
                 .brand(collection.getBrand())
                 .implement(true)
+                .createdAt(collection.getCreatedAt())
                 .build());
 
         emailService.sendNewCollectionNoticeForm(collection.getBrand());
