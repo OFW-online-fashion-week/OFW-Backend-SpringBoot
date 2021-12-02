@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CollectionRepository extends JpaRepository<Collection, Long>, QuerydslRepository {
+public interface CollectionRepository extends JpaRepository<Collection, Long> {
     Page<Collection> findAllByOrderByCreatedAt(Pageable pageable);
     List<Collection> findAllByBrandId(Long brandId);
     List<Collection> findAllByBrandIdAndImplementFalse(Long brandId);
