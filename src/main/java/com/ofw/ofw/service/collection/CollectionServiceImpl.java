@@ -54,9 +54,17 @@ public class CollectionServiceImpl implements CollectionService {
 
     @Override
     public CollectionResponse getCollection(Long collectionId) {
-        CollectionResponse collection = collectionRepository.getCollection(collectionId);
+        Collection collection = collectionRepository.findById(collectionId).orElseThrow(CollectionNotFoundException::new);
+        Designer designer = collection.getCollection_designer().get(0).getDesigner();
 
-        return new CollectionResponse(collection);
+        return new CollectionResponse(
+                collection.getTitle(),
+                collection.getDescription(),
+                designer.getName(),
+                designer.getEmail(),
+                designer.getDescription(),
+                designer.getProfilePath()
+        );
     }
 
     @Override
