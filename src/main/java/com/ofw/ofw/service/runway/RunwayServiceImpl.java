@@ -91,15 +91,25 @@ public class RunwayServiceImpl implements RunwayService {
 
     @Override
     public RunwayDetailResponse getRunwayDetail(Long runwayId) {
-        historyRepository.save(History.builder()
-                        .runway(runwayRepository.findById(runwayId).orElseThrow(RunwayNotFoundException::new))
-                        .user(userRepository.findById(authenticationFacade.getSub()).orElseThrow(UserNotFoundException::new))
-                        .build());
-        return runwayRepository.findById(runwayId)
-                .map(runway -> RunwayDetailResponse.builder()
-                        .runwayUrl(runway.getRunwayPath())
-                        .bgmPath(runway.getBgmPath())
-                        .build())
-                .orElseThrow(RunwayNotFoundException::new);
+        try {
+            historyRepository.save(History.builder()
+                    .runway(runwayRepository.findById(runwayId).orElseThrow(RunwayNotFoundException::new))
+                    .user(userRepository.findById(authenticationFacade.getSub()).orElseThrow(UserNotFoundException::new))
+                    .build());
+
+            return runwayRepository.findById(runwayId)
+                    .map(runway -> RunwayDetailResponse.builder()
+                            .runwayUrl(runway.getRunwayPath())
+                            .bgmPath(runway.getBgmPath())
+                            .build())
+                    .orElseThrow(RunwayNotFoundException::new);
+        } catch (Exception e) {
+            return runwayRepository.findById(runwayId)
+                    .map(runway -> RunwayDetailResponse.builder()
+                            .runwayUrl(runway.getRunwayPath())
+                            .bgmPath(runway.getBgmPath())
+                            .build())
+                    .orElseThrow(RunwayNotFoundException::new);
+        }
     }
 }
