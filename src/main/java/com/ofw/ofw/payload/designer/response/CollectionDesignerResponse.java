@@ -2,6 +2,7 @@ package com.ofw.ofw.payload.designer.response;
 
 import com.querydsl.core.annotations.QueryProjection;
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Builder
+@AllArgsConstructor
 public class CollectionDesignerResponse {
     @NotNull
     private String email;
@@ -21,19 +23,4 @@ public class CollectionDesignerResponse {
 
     @NotNull
     private String profilePath;
-
-    @QueryProjection
-    public CollectionDesignerResponse(String email, String name, String description, String profilePath) {
-        this.email = email;
-        this.name = name;
-        this.description = description;
-        this.profilePath = profilePath;
-    }
-
-    public CollectionDesignerResponse(CollectionDesignerResponse designerResponse){
-        this.email = designerResponse.getEmail();
-        this.name = designerResponse.getName();
-        this.description = designerResponse.getDescription();
-        this.profilePath = designerResponse.getProfilePath();
-    }
 }

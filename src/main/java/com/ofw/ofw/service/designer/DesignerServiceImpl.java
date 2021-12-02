@@ -3,6 +3,7 @@ package com.ofw.ofw.service.designer;
 import com.ofw.ofw.entity.collection.CollectionRepository;
 import com.ofw.ofw.entity.designer.Designer;
 import com.ofw.ofw.entity.designer.DesignerRepository;
+import com.ofw.ofw.exception.type.CollectionNotFoundException;
 import com.ofw.ofw.payload.designer.request.CreateDesignerRequest;
 import com.ofw.ofw.payload.designer.response.CollectionDesignerResponse;
 import com.ofw.ofw.payload.designer.response.SearchDesignerResponse;
@@ -38,9 +39,17 @@ public class DesignerServiceImpl implements DesignerService{
 
     @Override
     public CollectionDesignerResponse getDesigner(Long collectionId){
-        CollectionDesignerResponse designer = collectionRepository.getCollectionDesigner(collectionId);
+        Designer designer = collectionRepository.findById(collectionId)
+                .orElseThrow(CollectionNotFoundException::new)
+                .getCollection_designer().get(0)
+                .getDesigner();
 
-        return new CollectionDesignerResponse(designer);
+        return new CollectionDesignerResponse(
+                designer.getEmail(),
+                designer.getName(),
+                designer.getDescription(),
+                designer.getProfilePath()
+        );
     }
 
     @Override
