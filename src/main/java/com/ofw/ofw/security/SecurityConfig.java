@@ -52,6 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/designer/search/{name}").permitAll()
                 .antMatchers(HttpMethod.GET, "/designer/{collection}").permitAll()
                 .antMatchers(HttpMethod.GET, "/collection/brand/{brandId}").permitAll()
+                .antMatchers(HttpMethod.GET, "/collection/{collectionId}").permitAll()
                 .antMatchers(HttpMethod.GET, "/model").permitAll()
                 .antMatchers(HttpMethod.GET, "/model/{model_id}").permitAll()
                 .antMatchers(HttpMethod.GET, "/clothes/{clothes_id}").permitAll()
