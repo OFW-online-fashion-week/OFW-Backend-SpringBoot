@@ -2,7 +2,6 @@ package com.ofw.ofw.service.runway;
 
 import com.ofw.ofw.entity.clothes.ClothesRepository;
 import com.ofw.ofw.entity.clothes_has_runway.ClothesHasRunway;
-import com.ofw.ofw.entity.clothes_has_runway.ClothesHasRunwayId;
 import com.ofw.ofw.entity.clothes_has_runway.ClothesHasRunwayRepository;
 import com.ofw.ofw.entity.collection.CollectionRepository;
 import com.ofw.ofw.entity.history.History;
@@ -101,6 +100,7 @@ public class RunwayServiceImpl implements RunwayService {
                     .map(runway -> RunwayDetailResponse.builder()
                             .runwayUrl(runway.getRunwayPath())
                             .bgmPath(runway.getBgmPath())
+                            .modelId(runway.getModel().getId())
                             .build())
                     .orElseThrow(RunwayNotFoundException::new);
         } catch (Exception e) {
@@ -108,6 +108,7 @@ public class RunwayServiceImpl implements RunwayService {
                     .map(runway -> RunwayDetailResponse.builder()
                             .runwayUrl(runway.getRunwayPath())
                             .bgmPath(runway.getBgmPath())
+                            .modelId(runway.getModel().getId())
                             .build())
                     .orElseThrow(RunwayNotFoundException::new);
         }

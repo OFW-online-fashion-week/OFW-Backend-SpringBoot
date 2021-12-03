@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Builder
 @Getter
 @AllArgsConstructor
@@ -21,5 +19,6 @@ public class RunwayDetailResponse {
 
     private String bgmPath;
 
-    private List<Long> clothes;
+    @JsonProperty("model_id")
+    private Long modelId;
 }

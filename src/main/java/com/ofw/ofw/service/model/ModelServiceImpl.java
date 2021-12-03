@@ -89,6 +89,7 @@ public class ModelServiceImpl implements ModelService {
         profileRepository.save(
                 Profile.builder()
                         .model(model)
+                        .introduction(request.getIntroduction())
                         .height(request.getHeight())
                         .weight(request.getWeight())
                         .nation(request.getNation())
