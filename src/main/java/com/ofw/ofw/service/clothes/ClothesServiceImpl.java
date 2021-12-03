@@ -1,9 +1,11 @@
 package com.ofw.ofw.service.clothes;
 
-import com.ofw.ofw.entity.brand.BrandRepository;
 import com.ofw.ofw.entity.clothes.Clothes;
 import com.ofw.ofw.entity.clothes.ClothesRepository;
-import com.ofw.ofw.exception.type.BrandNotFoundException;
+import com.ofw.ofw.entity.clothes_has_runway.ClothesHasRunway;
+import com.ofw.ofw.entity.clothes_has_runway.ClothesHasRunwayRepository;
+import com.ofw.ofw.entity.runway.RunwayRepository;
+import com.ofw.ofw.exception.type.RunwayNotFoundException;
 import com.ofw.ofw.payload.clothes.request.ClothesPostRequest;
 import com.ofw.ofw.payload.clothes.response.ClothesDetailContentResponse;
 import com.ofw.ofw.payload.clothes.response.ClothesDetailListResponse;
@@ -20,7 +22,8 @@ import java.util.List;
 public class ClothesServiceImpl implements ClothesService {
 
     private final ClothesRepository clothesRepository;
-    private final BrandRepository brandRepository;
+    private final ClothesHasRunwayRepository clothesHasRunwayRepository;
+    private final RunwayRepository runwayRepository;
 
     @Override
     public ClothesSearchListResponse getSearchList(String filter) {
@@ -41,12 +44,15 @@ public class ClothesServiceImpl implements ClothesService {
     }
 
     @Override
-    public ClothesDetailListResponse getClothesDetail(Long brandId) {
-        List<Clothes> clothesList = clothesRepository.findAllByBrand(brandRepository.findById(brandId)
-                .orElseThrow(BrandNotFoundException::new));
+    public ClothesDetailListResponse getClothesDetail(Long runwayId) {
+        List<ClothesHasRunway> clothesHasRunwayList = clothesHasRunwayRepository.findAllByRunway(
+                runwayRepository.findById(runwayId)
+                        .orElseThrow(RunwayNotFoundException::new)
+        );
         List<ClothesDetailContentResponse> clothesContentList = new ArrayList<>();
 
-        for (Clothes clothes : clothesList) {
+        for (ClothesHasRunway clothesHasRunway : clothesHasRunwayList) {
+            Clothes clothes = clothesHasRunway.getClothes();
             clothesContentList.add(
                     ClothesDetailContentResponse.builder()
                             .name(clothes.getName())

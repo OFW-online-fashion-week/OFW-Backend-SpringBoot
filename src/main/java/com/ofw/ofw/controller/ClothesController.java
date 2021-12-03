@@ -19,9 +19,9 @@ public class ClothesController {
         return clothesService.getSearchList(filter);
     }
 
-    @GetMapping("/{clothes_id}")
-    public ClothesDetailListResponse getClothes(@PathVariable("clothes_id") Long clothesId) {
-        return clothesService.getClothesDetail(clothesId);
+    @GetMapping("/{runway_id}")
+    public ClothesDetailListResponse getClothes(@PathVariable("runway_id") Long runwayId) {
+        return clothesService.getClothesDetail(runwayId);
     }
 
     @PostMapping

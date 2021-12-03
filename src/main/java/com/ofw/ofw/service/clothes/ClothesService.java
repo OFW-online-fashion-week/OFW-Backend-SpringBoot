@@ -8,7 +8,7 @@ public interface ClothesService {
 
     ClothesSearchListResponse getSearchList(String filter);
 
-    ClothesDetailListResponse getClothesDetail(Long brandId);
+    ClothesDetailListResponse getClothesDetail(Long runwayId);
 
     void postClothes(ClothesPostRequest request);
 }
