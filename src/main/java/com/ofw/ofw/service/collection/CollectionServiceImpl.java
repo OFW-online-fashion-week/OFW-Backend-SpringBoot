@@ -1,7 +1,6 @@
 package com.ofw.ofw.service.collection;
 
 import com.ofw.ofw.entity.brand.Brand;
-import com.ofw.ofw.entity.brand.BrandRepository;
 import com.ofw.ofw.entity.collection.Collection;
 import com.ofw.ofw.entity.collection.CollectionRepository;
 import com.ofw.ofw.entity.collection_designer.CollectionDesigner;
@@ -30,7 +29,6 @@ public class CollectionServiceImpl implements CollectionService {
     private final CollectionRepository collectionRepository;
     private final DesignerRepository designerRepository;
     private final CollectionDesignerRepository collectionDesignerRepository;
-    private final BrandRepository brandRepository;
     private final EmailService emailService;
 
     @Override
@@ -40,6 +38,7 @@ public class CollectionServiceImpl implements CollectionService {
         List<CollectionContentResponse> contentResponses =
                 collections.stream().map(
                                 collection -> CollectionContentResponse.builder()
+                                        .id(collection.getId())
                                         .description(collection.getDescription())
                                         .title(collection.getTitle())
                                         .runwayPath(collection.getRunways().isEmpty() ? null : collection.getRunways().get(0).getRunwayPath())
