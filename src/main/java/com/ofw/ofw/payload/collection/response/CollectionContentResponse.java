@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CollectionContentResponse {
 
+    private Long id;
+
     private String title;
 
     private String runwayPath;

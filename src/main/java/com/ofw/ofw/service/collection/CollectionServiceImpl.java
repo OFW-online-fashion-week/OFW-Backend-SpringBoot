@@ -105,6 +105,7 @@ public class CollectionServiceImpl implements CollectionService {
         List<CollectionContentResponse> brandContentResponses =
                 collectionRepository.findAllByBrandId(brandId).stream().map(
                                 collection -> CollectionContentResponse.builder()
+                                        .id(collection.getId())
                                         .description(collection.getDescription())
                                         .title(collection.getTitle())
                                         .runwayPath(collection.getRunways().isEmpty() ? null : collection.getRunways().get(0).getRunwayPath())
