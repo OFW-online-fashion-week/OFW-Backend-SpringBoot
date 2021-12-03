@@ -15,16 +15,12 @@ import com.ofw.ofw.payload.collection.response.BrandCollectionListResponse;
 import com.ofw.ofw.payload.collection.response.CollectionContentResponse;
 import com.ofw.ofw.payload.collection.response.CollectionListResponse;
 import com.ofw.ofw.payload.collection.response.CollectionResponse;
-import com.ofw.ofw.security.facade.UserFacade;
-import com.ofw.ofw.security.jwt.auth.AuthenticationFacade;
 import com.ofw.ofw.service.email.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -106,18 +102,8 @@ public class CollectionServiceImpl implements CollectionService {
 
     @Override
     public BrandCollectionListResponse getBrandCollectionList(Long brandId) {
-        String email = UserFacade.getEmail();
-        List<Collection> brandCollections = new ArrayList<>();
-        Optional<Brand> brand = brandRepository.findByEmail(email);
-
-        if (brand.isEmpty()) {
-            brandCollections = collectionRepository.findAllByBrandIdAndImplementFalse(brandId);
-        } else {
-            brandCollections = collectionRepository.findAllByBrandId(brandId);
-        }
-
         List<CollectionContentResponse> brandContentResponses =
-                brandCollections.stream().map(
+                collectionRepository.findAllByBrandId(brandId).stream().map(
                                 collection -> CollectionContentResponse.builder()
                                         .description(collection.getDescription())
                                         .title(collection.getTitle())
