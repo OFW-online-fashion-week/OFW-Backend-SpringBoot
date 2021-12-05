@@ -86,7 +86,7 @@ public class AuthServiceImpl implements AuthService{
 
         User user = userRepository.findByEmail(email)
                 .orElseThrow(UserNotFoundException::new);
-        String userId = user.getId().toString();
+        Long userId = user.getId();
 
         return getToken(userId, request.getAud());
     }
@@ -99,15 +99,15 @@ public class AuthServiceImpl implements AuthService{
                         .name(request.getName())
                         .build()
         );
-        String userId = user.getId().toString();
+        Long userId = user.getId();
 
         return getToken(userId, request.getAud());
     }
 
-    private TokenResponse getToken(String email, String aud) {
-        String accessToken = jwtTokenProvider.generateAccessToken(email, aud);
+    private TokenResponse getToken(Long id, String aud) {
+        String accessToken = jwtTokenProvider.generateAccessToken(id.toString(), aud);
 
-        return new TokenResponse(accessToken);
+        return new TokenResponse(accessToken, id);
     }
 
     @Override

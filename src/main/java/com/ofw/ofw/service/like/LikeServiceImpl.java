@@ -1,14 +1,15 @@
 package com.ofw.ofw.service.like;
 
 import com.ofw.ofw.entity.brand.Brand;
+import com.ofw.ofw.entity.brand.BrandRepository;
 import com.ofw.ofw.entity.like.Like;
 import com.ofw.ofw.entity.like.LikeId;
 import com.ofw.ofw.entity.like.LikeRepository;
 import com.ofw.ofw.entity.user.UserRepository;
+import com.ofw.ofw.exception.type.BrandNotFoundException;
 import com.ofw.ofw.exception.type.UserNotFoundException;
 import com.ofw.ofw.payload.like.response.LikeBrandContentResponse;
 import com.ofw.ofw.payload.like.response.LikeBrandListResponse;
-import com.ofw.ofw.security.jwt.auth.AuthenticationFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,26 +22,27 @@ import java.util.Optional;
 public class LikeServiceImpl implements LikeService {
 
     private final LikeRepository likeRepository;
-    private final AuthenticationFacade authenticationFacade;
     private final UserRepository userRepository;
+    private final BrandRepository brandRepository;
 
     @Override
-    public void userLikeBrand(Long brandId) {
+    public void userLikeBrand(Long brandId, Long userId) {
         Like like = Like.builder()
-                .likeId(LikeId.builder().brandId(brandId).userId(authenticationFacade.getSub()).build())
+                .user(userRepository.findById(userId).orElseThrow(UserNotFoundException::new))
+                .brand(brandRepository.findById(brandId).orElseThrow(BrandNotFoundException::new))
                 .build();
 
         likeRepository.save(like);
     }
 
     @Override
-    public void userUnlikeBrand(Long brandId) {
-        likeRepository.deleteById(LikeId.builder().brandId(brandId).userId(authenticationFacade.getSub()).build());
+    public void userUnlikeBrand(Long brandId, Long userId) {
+        likeRepository.deleteById(LikeId.builder().brandId(brandId).userId(userId).build());
     }
 
     @Override
-    public LikeBrandListResponse getLikeBrandList() {
-        List<Like> likeList = likeRepository.findAllByUser(userRepository.findById(authenticationFacade.getSub())
+    public LikeBrandListResponse getLikeBrandList(Long userId) {
+        List<Like> likeList = likeRepository.findAllByUser(userRepository.findById(userId)
                 .orElseThrow(UserNotFoundException::new));
         List<LikeBrandContentResponse> likeContentList = new ArrayList<>();
 
@@ -59,12 +61,12 @@ public class LikeServiceImpl implements LikeService {
     }
 
     @Override
-    public boolean isLike(Long brandId) {
+    public boolean isLike(Long brandId, Long userId) {
         Optional<Like> like = likeRepository.findById(LikeId.builder()
-                        .userId(authenticationFacade.getSub())
+                        .userId(userId)
                         .brandId(brandId)
                 .build());
 
-        return like.isEmpty();
+        return like.isPresent();
     }
 }
